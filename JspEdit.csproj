@@ -1,0 +1,982 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B7687FD1-FB58-4ACF-8035-AA4734A1B984}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>JspEdit</RootNamespace>
+    <AssemblyName>JspEdit</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1day.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1downarrow1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1downarrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1leftarrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1rightarrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1uparrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\2dowarrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\2downarrow1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\2downarrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\2leftarrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\2rightarrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\2uparrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\3dowarrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\3uparrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\5days.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\7days.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\about_kde.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add_group.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add_user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\advanced.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agt_action_fail1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agt_action_fail.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agt_action_success.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agt_add-to-autorun.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agt_add-to-desktop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agt_aisles.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agt_announcements.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agt_back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agt_business.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agt_desktop_enhancements.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agt_forum.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agt_forward.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agt_games.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agt_home.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agt_internet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agt_member.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agt_mp3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agt_multimedia.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agt_pause-queue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agt_print.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agt_reload.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agt_resume.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agt_runit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agt_softwareD.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agt_stop1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agt_stop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agt_support.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agt_uninstall_product.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agt_uninstall-product.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agt_update_critical.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agt_update_drivers.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agt_update_misc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agt_update_recommended1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agt_update_recommended.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agt_update-product.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agt_upgrade_misc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agt_utilities.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agt_virus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agt_virus-off.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agt_virussafe.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agt_web.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\aisles.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\alarmd.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\anti_spam.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\appearance.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\apply.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\appointment.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\artsbuilderexecute.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\attach.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\audio&amp;video.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bell.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bookmark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bookmark_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bookmark_folder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bookmark_toolbar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bookmarks_list_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\build.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\buisness.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\button_cancel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\button_ok.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\camera.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\camera_test.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cancel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cdcopy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cdinfo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cdrwblank.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\clicknrun.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\clicknrungrey copy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cnr.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cnrclient.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cnrdelete-all1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cnrdelete-all.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cnrgrey.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cnr-pending.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cnruninstall.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\colorize.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\compfile.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\configure.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\connect_creating.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\connect_established.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\connect_no.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\contents.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\contexthelp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\db.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\db_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\db_comit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\db_remove.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\db_status.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\db_update.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\decrypted.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\demo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\desktop-enhancments.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\documentinfo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\down.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\download.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit_remove ----.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit_remove.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\editclear.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\editcopy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\editcut.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\editdelete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\editpaste.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edittrash.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\education.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\encrypted.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\endturn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\exec.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\exit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\field.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fileclose.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fileexport.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\filefind.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fileimport.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\filenew.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fileopen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fileprint1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fileprint.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\filequickprint.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\filesave.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\filesaveas.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\filter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\find.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\findf.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\folder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\folder_new.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\folder_sent_mail.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\forward.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\funct.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\games.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\games_kids.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gear.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gohome.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\graphic-design.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\groupevent.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\halfencrypted.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\help.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hibernate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\home&amp;food.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\home.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\identity.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\inbox.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\internet&amp;networking.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\internet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\irkick.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\irkickflash.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\irkickoff.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\itunes2aqua.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\kalarm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\kalarm_disabled.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\kdevelop_down.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\klipper_doc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\klipper_dock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\kmix.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\kmixdocked_error.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\kmixdocked_mute.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\knewstuff.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lin_agt_wrench.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lockstart_session.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mail_delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mail_find.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mail_forward.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mail_generic.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mail_get.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mail_new.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mail_post_to.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mail_replay.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mail_replayall.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mail_reply.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mail_replyall.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mail_send.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mailappt.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\messagebox_critical.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\messagebox_info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\messagebox_warning.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\misc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\money.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\month.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mouse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mp3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\multimedia2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\netjaxer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\network.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\new window.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\new_window.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\newfont.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\next.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\no.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ok.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\openterm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\organizer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\outbox1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\outbox.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\personal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\player_eject.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\player_end1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\player_end.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\player_fwd.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\player_pause.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\player_play.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\player_rew.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\player_start.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\player_stop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\player_time.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\player_volume.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\player-end.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\playlist.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\playsound.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\previous.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\project_open.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\queue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\quick_restart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rebuild.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\redo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\reload.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\reload_all_tabs.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\reload_page.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\restart-1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\restart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\revert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\run.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\runit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\runprog.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save_all.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\server.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\shutdown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\signature.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\software-development.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\status_unknown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\stop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tab.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tab_duplicate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tab_new.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tab_new_r-----.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tab_new_raised.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tab_remove.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\terminal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\thumbnail.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\todo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\toggle_log.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\top1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Top.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\trash.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tux.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\undo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\unlock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\up.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\utilities.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\view_bottom.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\view_choose.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\view_detailed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\view_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\view_left_right.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\view_multicolumn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\view_remove2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\view_remove.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\view_right.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\view_right_p.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\view_sidetree.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\view_text.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\view_top_bottom.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\view_tree.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\viewmag1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\viewmag.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\viewmag-.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\viewmag+.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\viewmagfit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\web.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\webexport.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\window_fullscreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\window_new.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\window_nofullscreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\wizard.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
