@@ -277,23 +277,13 @@ Color.FromArgb(252,252,252)
             InitializeComponent();
         }
 
-        private void label2_Click( object sender, EventArgs e )
-        {
-
-        }
-
-        private void label1_Click( object sender, EventArgs e )
-        {
-
-        }
-
         private void MainForm_Load( object sender, EventArgs e )
         {
            
-            Bitmap B = new Bitmap( 8*16, // 8 pixels per tile
+            Bitmap B = new Bitmap( 8*16, // 8 pixels wide per tile, of 16
                                    6*16, // 6 pixels high 
                 System.Drawing.Imaging.PixelFormat.Format8bppIndexed );
-
+            
             // ARCANE WIZARDRY INCOMING!
             var pallete = B.Palette;
             Color[] entries = pallete.Entries;
