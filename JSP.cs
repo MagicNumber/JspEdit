@@ -53,8 +53,6 @@ namespace JspEdit
             this.Data = newData;
         }
 
-      
-
     }
 
 }
