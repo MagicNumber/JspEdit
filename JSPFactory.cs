@@ -31,12 +31,83 @@ namespace JspEdit
 			        simply follows it.
 			        Runs do not cross line boundaries. */
 
-        public JSP Load( StreamReader stream )
+        public JSP Load( BinaryReader stream )
         {
-            UInt16 frames = stream.Read() as UInt16;
+            int pos = 0;
+            try
+            {
+                Int16 ImageCount = stream.ReadInt16();
+                pos += 2;
+                if ( ImageCount < 1 ) 
+                    throw new InvalidDataException("Non-positive image count");
 
+                JSP Collection = new JSP();
 
-            return null;
+                for ( int im = 0; im < ImageCount; im++ )
+                {
+                    Int16 width = stream.ReadInt16(); 
+                    Int16 height = stream.ReadInt16();
+                    pos += 2 + 2;
+                    if ( width < 1 || height < 1 ) 
+                        throw new InvalidDataException( string.Format( "Image {0} has a height/width of {1},{2}. This doesn't make sense.", im, height, width ) );
+
+                    Int16 ofsX = stream.ReadInt16();
+                    Int16 ofsY = stream.ReadInt16();
+                    pos += 2 + 2;
+
+                    Int32 dataSize = stream.ReadInt32();
+                    pos += 4;
+
+                    byte[] compressedData = new byte[dataSize];
+                    for ( int index = 0; index < compressedData.Length; index++ )
+                    {
+                        compressedData[index] = stream.ReadByte();
+                        pos += 1;
+                    }
+
+                    List<byte> data = new List<byte>();
+
+                    for ( int i = 0; i < compressedData.Length; i++ )
+                    {
+                        byte bytecount = compressedData[i];
+                        if ( (bytecount & 128) >1) // bytecount is negative
+                        {
+                            for ( int a = 0; a < bytecount; a++ )
+                            {
+                                data.Add( 0 );
+                            }
+                        }
+                        else
+                        {
+                            for ( int a = 0; a < bytecount; a++ )
+                            {
+                                i++;
+                                data.Add( compressedData[i] );
+                                 // Probably a better way of doing this, since advancing the 
+                            }
+                        }
+
+                    }
+
+                    
+                    JSPImage Image = new JSPImage( width, height );
+                    Image.SetData( data.ToArray() );
+                    Image.SetOffSet( ofsX, ofsY );
+                    Collection.Images.Add( Image );
+                    
+                }
+                return Collection;
+            }
+            catch ( EndOfStreamException EoS )
+            {
+                EoS.Data["position"] = pos;
+                throw EoS;
+            }
+        }
+
+        public static void Save( JSP obj, Stream sout )
+        {
+            return;
         }
 
     }
