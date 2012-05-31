@@ -23,6 +23,8 @@ namespace JspEdit
         private void MainForm_Load( object sender, EventArgs e )
         {
            
+           var output = JSPFactory.Load( new System.IO.BinaryReader( new System.IO.FileStream("walls.jsp", System.IO.FileMode.Open)));
+            
             Bitmap B = new Bitmap( 8*16, // 8 pixels wide per tile, of 16
                                    6*16, // 6 pixels high 
                 System.Drawing.Imaging.PixelFormat.Format8bppIndexed );
