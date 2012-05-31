@@ -88,6 +88,7 @@
             this.OpenButton.Name = "OpenButton";
             this.OpenButton.Size = new System.Drawing.Size( 28, 28 );
             this.OpenButton.Text = "Open";
+            this.OpenButton.Click += new System.EventHandler( this.OpenButton_Click );
             // 
             // SaveButton
             // 
@@ -127,13 +128,13 @@
             // exportToolStripMenuItem
             // 
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size( 152, 22 );
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size( 150, 22 );
             this.exportToolStripMenuItem.Text = "Import Sprite";
             // 
             // importFolderToolStripMenuItem
             // 
             this.importFolderToolStripMenuItem.Name = "importFolderToolStripMenuItem";
-            this.importFolderToolStripMenuItem.Size = new System.Drawing.Size( 152, 22 );
+            this.importFolderToolStripMenuItem.Size = new System.Drawing.Size( 150, 22 );
             this.importFolderToolStripMenuItem.Text = "Import Folder";
             // 
             // ExportButton
@@ -151,13 +152,13 @@
             // exportToolStripMenuItem1
             // 
             this.exportToolStripMenuItem1.Name = "exportToolStripMenuItem1";
-            this.exportToolStripMenuItem1.Size = new System.Drawing.Size( 152, 22 );
+            this.exportToolStripMenuItem1.Size = new System.Drawing.Size( 148, 22 );
             this.exportToolStripMenuItem1.Text = "Export Sprite";
             // 
             // exportFolderToolStripMenuItem
             // 
             this.exportFolderToolStripMenuItem.Name = "exportFolderToolStripMenuItem";
-            this.exportFolderToolStripMenuItem.Size = new System.Drawing.Size( 152, 22 );
+            this.exportFolderToolStripMenuItem.Size = new System.Drawing.Size( 148, 22 );
             this.exportFolderToolStripMenuItem.Text = "Export JSP";
             // 
             // toolStripSeparator1
@@ -345,7 +346,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "MainForm";
             this.Text = "JSP Edit";
-            this.Load += new System.EventHandler( this.MainForm_Load );
+            this.Paint += new System.Windows.Forms.PaintEventHandler( this.MainForm_Paint );
             this.toolStrip1.ResumeLayout( false );
             this.toolStrip1.PerformLayout();
             ( (System.ComponentModel.ISupportInitialize) ( this.pictureBox1 ) ).EndInit();

@@ -49,17 +49,19 @@ namespace JspEdit
             {
                 Int16 ImageCount = stream.ReadInt16();
                 pos += 2;
-                if ( ImageCount < 1 ) 
-                    throw new InvalidDataException("Non-positive image count");
+                if ( ImageCount < 1 )
+                    throw new InvalidDataException( "Non-positive image count" );
+
+                int[] dataLengths = new int[ImageCount];
 
                 JSP Collection = new JSP();
 
                 for ( int im = 0; im < ImageCount; im++ )
                 {
-                    Int16 width = stream.ReadInt16(); 
+                    Int16 width = stream.ReadInt16();
                     Int16 height = stream.ReadInt16();
                     pos += 2 + 2;
-                    if ( width < 1 || height < 1 ) 
+                    if ( width < 1 || height < 1 )
                         throw new InvalidDataException( string.Format( "Image {0} has a height/width of {1},{2}. This doesn't make sense.", im, height, width ) );
 
                     Int16 ofsX = stream.ReadInt16();
@@ -69,59 +71,59 @@ namespace JspEdit
                     Int32 dataSize = stream.ReadInt32();
                     pos += 4;
 
+                    stream.ReadInt32(); // Four blank bytes.
+                    pos += 4;
 
-                    stream.ReadInt32(); // For reasons best known to Jamul, there are four garbage bytes in the format.
+                    dataLengths[im] = dataSize;
 
-                    byte[] compressedData = new byte[dataSize];
-                    for ( int index = 0; index < compressedData.Length; index++ )
+                    JSPImage Image = new JSPImage( width, height );
+                    Image.SetOffSet( ofsX, ofsY );
+                    Collection.Images.Add( Image );
+
+                }
+
+                for ( int ImageNum = 0; ImageNum < ImageCount; ImageNum++ )
+                {
+                    List<byte> imgdata = new List<byte>();
+
+                    for ( int byteIndex = 0; byteIndex < dataLengths[ImageNum]; byteIndex++ )
                     {
-                        compressedData[index] = stream.ReadByte();
+                        byte sb = stream.ReadByte();
                         pos += 1;
-                    }
-
-                    List<byte> data = new List<byte>();
-
-                    
-
-                    for ( int i = 0; i < compressedData.Length; i++ )
-                    {
-                        byte ByteCount = compressedData[i];
-                        bool negative = ByteCount > 128;
-                        var uByteCount = (byte) (ByteCount & 0x7F); // Is bytecount negative when signed? Regardless if it is, strip the sign bit.
+                        bool negative = sb > 128;
+                        byte usb = (byte) ( sb & 0x7F );
 
                         if ( negative )
                         {
-                            for ( int a = 0; a < uByteCount; a++ )
+                            for ( int i = 0; i < usb; i++ )
                             {
-                                data.Add( 0 );
+                                imgdata.Add( 0 );
                             }
                         }
                         else
                         {
-                            for ( int a = 0; a < uByteCount; a++ )
+                            for ( int i = 0; i < usb; i++ )
                             {
-
-                                data.Add( compressedData[i] );
-                                i++;
-                                // Probably a better way of doing this, since advancing the outer loop is bad. 
+                                imgdata.Add( stream.ReadByte() );
+                                pos += 1;
+                                byteIndex++;
                             }
                         }
-
                     }
 
-                    
-                    JSPImage Image = new JSPImage( width, height );
-                    Image.SetData( data.ToArray() );
-                    Image.SetOffSet( ofsX, ofsY );
-                    Collection.Images.Add( Image );
-                    
+                    Collection.Images[ImageNum].SetData( imgdata.ToArray() );
                 }
+
+
                 return Collection;
             }
-            catch ( EndOfStreamException EoS )
+            /*catch ( EndOfStreamException EoS )
             {
                 EoS.Data["position"] = pos;
-                throw EoS;
+                throw;
+            }*/
+            finally
+            {
             }
         }
 
