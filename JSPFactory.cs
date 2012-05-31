@@ -31,7 +31,18 @@ namespace JspEdit
 			        simply follows it.
 			        Runs do not cross line boundaries. */
 
-        public JSP Load( BinaryReader stream )
+        /*
+         * 00:52 - SpaceManiac: for each image you read its metadata then its data
+00:52 - SpaceManiac: you want to read all the metadata first
+00:52 - Blue Canary: ...oh.
+00:52 - Blue Canary: And then all the data is contiguous?
+00:52 - SpaceManiac: yeah
+00:52 - SpaceManiac: thought I mentioned that before
+00:52 - Blue Canary: ..no
+00:52 - Blue Canary: the opposite is implied by your spec
+*/
+
+        public static JSP Load( BinaryReader stream )
         {
             int pos = 0;
             try
@@ -58,6 +69,9 @@ namespace JspEdit
                     Int32 dataSize = stream.ReadInt32();
                     pos += 4;
 
+
+                    stream.ReadInt32(); // For reasons best known to Jamul, there are four garbage bytes in the format.
+
                     byte[] compressedData = new byte[dataSize];
                     for ( int index = 0; index < compressedData.Length; index++ )
                     {
@@ -67,23 +81,29 @@ namespace JspEdit
 
                     List<byte> data = new List<byte>();
 
+                    
+
                     for ( int i = 0; i < compressedData.Length; i++ )
                     {
-                        byte bytecount = compressedData[i];
-                        if ( (bytecount & 128) >1) // bytecount is negative
+                        byte ByteCount = compressedData[i];
+                        bool negative = ByteCount > 128;
+                        var uByteCount = (byte) (ByteCount & 0x7F); // Is bytecount negative when signed? Regardless if it is, strip the sign bit.
+
+                        if ( negative )
                         {
-                            for ( int a = 0; a < bytecount; a++ )
+                            for ( int a = 0; a < uByteCount; a++ )
                             {
                                 data.Add( 0 );
                             }
                         }
                         else
                         {
-                            for ( int a = 0; a < bytecount; a++ )
+                            for ( int a = 0; a < uByteCount; a++ )
                             {
-                                i++;
+
                                 data.Add( compressedData[i] );
-                                 // Probably a better way of doing this, since advancing the 
+                                i++;
+                                // Probably a better way of doing this, since advancing the outer loop is bad. 
                             }
                         }
 
