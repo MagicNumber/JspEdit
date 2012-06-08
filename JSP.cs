@@ -335,9 +335,9 @@ namespace JspEdit
             for ( int i = 0; i < this.Data.Length; i++ )
             {
                 Color c = colors[this.Data[i]];
-                bitdata[i * 3] = c.R;
+                bitdata[i * 3] = c.B;
                 bitdata[i * 3 + 1] = c.G;
-                bitdata[i * 3 + 2] = c.B;
+                bitdata[i * 3 + 2] = c.R;
             }
             
             Marshal.Copy( bitdata, 0, imgdata.Scan0, bitdata.Length );
