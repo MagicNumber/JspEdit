@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager( typeof( MainForm ) );
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.OpenButton = new System.Windows.Forms.ToolStripButton();
@@ -42,7 +43,6 @@
             this.exportFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.ConfigButton = new System.Windows.Forms.ToolStripSplitButton();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -57,6 +57,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.imageList1 = new System.Windows.Forms.ImageList( this.components );
             this.toolStrip1.SuspendLayout();
             ( (System.ComponentModel.ISupportInitialize) ( this.pictureBox1 ) ).BeginInit();
             this.SuspendLayout();
@@ -176,15 +178,6 @@
             this.ConfigButton.Size = new System.Drawing.Size( 40, 28 );
             this.ConfigButton.Text = "Configuration";
             this.ConfigButton.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Location = new System.Drawing.Point( 50, 34 );
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size( 154, 447 );
-            this.panel1.TabIndex = 1;
             // 
             // label1
             // 
@@ -322,11 +315,26 @@
             this.pictureBox1.TabIndex = 14;
             this.pictureBox1.TabStop = false;
             // 
+            // listView1
+            // 
+            this.listView1.Location = new System.Drawing.Point( 54, 36 );
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size( 121, 445 );
+            this.listView1.TabIndex = 15;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            // 
+            // imageList1
+            // 
+            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.imageList1.ImageSize = new System.Drawing.Size( 16, 16 );
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF( 6F, 13F );
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size( 717, 510 );
+            this.Controls.Add( this.listView1 );
             this.Controls.Add( this.pictureBox1 );
             this.Controls.Add( this.textBox1 );
             this.Controls.Add( this.textBox2 );
@@ -341,7 +349,6 @@
             this.Controls.Add( this.button2 );
             this.Controls.Add( this.button1 );
             this.Controls.Add( this.label1 );
-            this.Controls.Add( this.panel1 );
             this.Controls.Add( this.toolStrip1 );
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "MainForm";
@@ -370,7 +377,6 @@
         private System.Windows.Forms.ToolStripDropDownButton ExportButton;
         private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem exportFolderToolStripMenuItem;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
@@ -385,6 +391,8 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ImageList imageList1;
 
     }
 }
