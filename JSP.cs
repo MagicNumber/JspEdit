@@ -329,9 +329,9 @@ namespace JspEdit
         public Bitmap ToBitmap()
         {
             Bitmap B = new Bitmap( Width, Height, PixelFormat.Format24bppRgb );
-            var imgdata = B.LockBits( new Rectangle( 0, 0, Width, Height ), ImageLockMode.WriteOnly, PixelFormat.Format24bppRgb );
 
-            byte[] bitdata = new byte[this.Data.Length * 3];
+            byte[] bitdata = new byte[this.Data.Length * 3]; // The raw BGR data of the bitmap. 
+            
             for ( int i = 0; i < this.Data.Length; i++ )
             {
                 Color c = colors[this.Data[i]];
@@ -339,10 +339,25 @@ namespace JspEdit
                 bitdata[i * 3 + 1] = c.G;
                 bitdata[i * 3 + 2] = c.R;
             }
-            
-            Marshal.Copy( bitdata, 0, imgdata.Scan0, bitdata.Length );
+            // Because this.Data is actually a set of indices into the color palette, we need the BGR data to construct the image from it.
 
-            B.UnlockBits( imgdata );
+            // OK, this turned out to be more complicated than it looked. We need to blit the data per row, instead of all at once.
+            // See http://bobpowell.net/lockingbits.htm
+            var imgdata = B.LockBits( new Rectangle( 0, 0, Width, Height ), ImageLockMode.WriteOnly, PixelFormat.Format24bppRgb );
+
+            int numRows = B.Height;
+            int numBytesPerRow = B.Width * 3;
+
+            for ( int n = 0; n < numRows; n++ )
+            {
+                Marshal.Copy(
+                source: bitdata,
+                startIndex: n*numBytesPerRow,
+                destination: imgdata.Scan0 + n*imgdata.Stride,
+                length: numBytesPerRow
+                );
+            }
+            
             B.MakeTransparent( Color.Black );
             return B;
         }
