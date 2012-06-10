@@ -46,8 +46,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.DelButton = new System.Windows.Forms.Button();
+            this.AddButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.HeightBox = new System.Windows.Forms.TextBox();
@@ -78,7 +78,7 @@
             this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStrip1.Location = new System.Drawing.Point( 0, 0 );
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size( 717, 31 );
+            this.toolStrip1.Size = new System.Drawing.Size( 794, 31 );
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -181,9 +181,10 @@
             // 
             // label1
             // 
+            this.label1.Anchor = ( (System.Windows.Forms.AnchorStyles) ( ( System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left ) ) );
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font( "Verdana", 10F );
-            this.label1.Location = new System.Drawing.Point( 66, 484 );
+            this.label1.Location = new System.Drawing.Point( 65, 542 );
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size( 98, 17 );
             this.label1.TabIndex = 2;
@@ -209,28 +210,31 @@
             this.button2.TabIndex = 4;
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // DelButton
             // 
-            this.button3.BackgroundImage = global::JspEdit.Properties.Resources.edit_remove;
-            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button3.Location = new System.Drawing.Point( 12, 449 );
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size( 32, 32 );
-            this.button3.TabIndex = 5;
-            this.button3.UseVisualStyleBackColor = true;
+            this.DelButton.Anchor = ( (System.Windows.Forms.AnchorStyles) ( ( System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left ) ) );
+            this.DelButton.BackgroundImage = global::JspEdit.Properties.Resources.edit_remove;
+            this.DelButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.DelButton.Location = new System.Drawing.Point( 12, 507 );
+            this.DelButton.Name = "DelButton";
+            this.DelButton.Size = new System.Drawing.Size( 32, 32 );
+            this.DelButton.TabIndex = 5;
+            this.DelButton.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // AddButton
             // 
-            this.button4.BackgroundImage = global::JspEdit.Properties.Resources.edit_add;
-            this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button4.Location = new System.Drawing.Point( 12, 411 );
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size( 32, 32 );
-            this.button4.TabIndex = 5;
-            this.button4.UseVisualStyleBackColor = true;
+            this.AddButton.Anchor = ( (System.Windows.Forms.AnchorStyles) ( ( System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left ) ) );
+            this.AddButton.BackgroundImage = global::JspEdit.Properties.Resources.edit_add;
+            this.AddButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.AddButton.Location = new System.Drawing.Point( 12, 469 );
+            this.AddButton.Name = "AddButton";
+            this.AddButton.Size = new System.Drawing.Size( 32, 32 );
+            this.AddButton.TabIndex = 5;
+            this.AddButton.UseVisualStyleBackColor = true;
             // 
             // label2
             // 
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font( "Verdana", 10F );
             this.label2.Location = new System.Drawing.Point( 210, 48 );
@@ -241,6 +245,7 @@
             // 
             // label3
             // 
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font( "Verdana", 10F );
             this.label3.Location = new System.Drawing.Point( 210, 78 );
@@ -251,6 +256,7 @@
             // 
             // HeightBox
             // 
+            this.HeightBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.HeightBox.BackColor = System.Drawing.Color.White;
             this.HeightBox.Location = new System.Drawing.Point( 330, 48 );
             this.HeightBox.Name = "HeightBox";
@@ -260,6 +266,7 @@
             // 
             // WidthBox
             // 
+            this.WidthBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.WidthBox.BackColor = System.Drawing.Color.White;
             this.WidthBox.Location = new System.Drawing.Point( 330, 79 );
             this.WidthBox.Name = "WidthBox";
@@ -269,6 +276,7 @@
             // 
             // textBox1
             // 
+            this.textBox1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.textBox1.BackColor = System.Drawing.Color.White;
             this.textBox1.Location = new System.Drawing.Point( 556, 79 );
             this.textBox1.Name = "textBox1";
@@ -278,6 +286,7 @@
             // 
             // textBox2
             // 
+            this.textBox2.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.textBox2.BackColor = System.Drawing.Color.White;
             this.textBox2.Location = new System.Drawing.Point( 556, 48 );
             this.textBox2.Name = "textBox2";
@@ -287,6 +296,7 @@
             // 
             // label4
             // 
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font( "Verdana", 10F );
             this.label4.Location = new System.Drawing.Point( 436, 78 );
@@ -297,6 +307,7 @@
             // 
             // label5
             // 
+            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font( "Verdana", 10F );
             this.label5.Location = new System.Drawing.Point( 436, 48 );
@@ -307,11 +318,14 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.Anchor = ( (System.Windows.Forms.AnchorStyles) ( ( ( ( System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom )
+                        | System.Windows.Forms.AnchorStyles.Left )
+                        | System.Windows.Forms.AnchorStyles.Right ) ) );
             this.pictureBox1.BackColor = System.Drawing.Color.White;
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox1.Location = new System.Drawing.Point( 213, 184 );
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size( 492, 297 );
+            this.pictureBox1.Size = new System.Drawing.Size( 569, 355 );
             this.pictureBox1.TabIndex = 14;
             this.pictureBox1.TabStop = false;
             // 
@@ -323,17 +337,20 @@
             // 
             // panel1
             // 
+            this.panel1.Anchor = ( (System.Windows.Forms.AnchorStyles) ( ( ( System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom )
+                        | System.Windows.Forms.AnchorStyles.Left ) ) );
+            this.panel1.AutoScroll = true;
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.Location = new System.Drawing.Point( 51, 36 );
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size( 153, 445 );
+            this.panel1.Size = new System.Drawing.Size( 153, 503 );
             this.panel1.TabIndex = 15;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF( 6F, 13F );
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size( 717, 510 );
+            this.ClientSize = new System.Drawing.Size( 794, 568 );
             this.Controls.Add( this.panel1 );
             this.Controls.Add( this.pictureBox1 );
             this.Controls.Add( this.textBox1 );
@@ -344,15 +361,16 @@
             this.Controls.Add( this.HeightBox );
             this.Controls.Add( this.label3 );
             this.Controls.Add( this.label2 );
-            this.Controls.Add( this.button4 );
-            this.Controls.Add( this.button3 );
+            this.Controls.Add( this.AddButton );
+            this.Controls.Add( this.DelButton );
             this.Controls.Add( this.button2 );
             this.Controls.Add( this.button1 );
             this.Controls.Add( this.label1 );
             this.Controls.Add( this.toolStrip1 );
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "MainForm";
+            this.ShowInTaskbar = false;
             this.Text = "JSP Edit";
+            this.ResizeBegin += new System.EventHandler( this.MainForm_ResizeBegin );
             this.Paint += new System.Windows.Forms.PaintEventHandler( this.MainForm_Paint );
             this.toolStrip1.ResumeLayout( false );
             this.toolStrip1.PerformLayout();
@@ -380,8 +398,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button DelButton;
+        private System.Windows.Forms.Button AddButton;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox HeightBox;

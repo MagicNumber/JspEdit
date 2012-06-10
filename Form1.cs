@@ -12,11 +12,13 @@ namespace JspEdit
     public partial class MainForm : Form
     {
         readonly Size thumbnailSize = new Size( 1000, 48 );
-
+        readonly Size OriginalFormSize;
 
         public MainForm()
         {
             InitializeComponent();
+            this.DoubleBuffered = true;
+            OriginalFormSize = new Size( this.Size.Width, this.Size.Height );
         }
 
         JSP output;
@@ -65,27 +67,37 @@ namespace JspEdit
 
             panel1.Controls.Clear();
 
+            int heightSoFar = 0;
+
             for (int i = 0; i < output.Images.Count; i++)
 			{
                 Bitmap orig = output.Images[i].ToBitmap();
-                //Bitmap thumbnail = new Bitmap( thumbnailSize.Width, thumbnailSize.Height );
-                /*Graphics gx = Graphics.FromImage( thumbnail );
-                gx.DrawImage( orig, x: 0, y: 0, width: thumbnail.Width, height: thumbnail.Height );*/
-
+               
                 ImageDisplay img = new ImageDisplay();
                 img.Image = orig;
                 img.Width = panel1.Width;
                 img.Height = panel1.Width;
-                img.Top = i * img.Height;
+                img.Top = heightSoFar;
+                heightSoFar += img.Height;
                 panel1.Controls.Add( img );
             }
             panel1.Invalidate();
             label1.Text = output.Images.Count.ToString();
-
-            /*listView1.LargeImageList = imageList1;
-            listView1.View = View.LargeIcon;
-            listView1.Invalidate();*/
         }
+
+        private void MainForm_ResizeBegin( object sender, EventArgs e )
+        {
+            this.Width = this.Width > OriginalFormSize.Width ? this.Width : OriginalFormSize.Width;
+            this.Height = this.Height > OriginalFormSize.Height ? this.Height : OriginalFormSize.Height;    
+        }
+
+        protected override void OnResize( EventArgs e )
+        {
+            if ( this.Width > OriginalFormSize.Width
+                && this.Height > OriginalFormSize.Height )
+                base.OnResize( e );
+        }
+
 
 
     }
