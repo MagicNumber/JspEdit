@@ -57,8 +57,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.listView1 = new System.Windows.Forms.ListView();
             this.imageList1 = new System.Windows.Forms.ImageList( this.components );
+            this.panel1 = new System.Windows.Forms.Panel();
             this.toolStrip1.SuspendLayout();
             ( (System.ComponentModel.ISupportInitialize) ( this.pictureBox1 ) ).BeginInit();
             this.SuspendLayout();
@@ -315,26 +315,26 @@
             this.pictureBox1.TabIndex = 14;
             this.pictureBox1.TabStop = false;
             // 
-            // listView1
-            // 
-            this.listView1.Location = new System.Drawing.Point( 54, 36 );
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size( 121, 445 );
-            this.listView1.TabIndex = 15;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            // 
             // imageList1
             // 
             this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
             this.imageList1.ImageSize = new System.Drawing.Size( 16, 16 );
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Location = new System.Drawing.Point( 51, 36 );
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size( 153, 445 );
+            this.panel1.TabIndex = 15;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF( 6F, 13F );
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size( 717, 510 );
-            this.Controls.Add( this.listView1 );
+            this.Controls.Add( this.panel1 );
             this.Controls.Add( this.pictureBox1 );
             this.Controls.Add( this.textBox1 );
             this.Controls.Add( this.textBox2 );
@@ -391,8 +391,8 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.Panel panel1;
 
     }
 }
