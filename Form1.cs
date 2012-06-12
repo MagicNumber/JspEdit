@@ -13,12 +13,13 @@ namespace JspEdit
     {
         readonly Size thumbnailSize = new Size( 1000, 48 );
         readonly Size OriginalFormSize;
+        //readonly 
 
         public MainForm()
         {
             InitializeComponent();
             this.DoubleBuffered = true;
-            OriginalFormSize = new Size( this.Size.Width, this.Size.Height );
+            this.MinimumSize = OriginalFormSize = new Size( this.Size.Width, this.Size.Height );
         }
 
         JSP output;
@@ -52,9 +53,6 @@ namespace JspEdit
             this.Invalidate();
         }
 
-        
-
-
         private void LoadJSP( string name )
         {
             output = JSPFactory.Load(
@@ -85,19 +83,15 @@ namespace JspEdit
             label1.Text = output.Images.Count.ToString();
         }
 
-        private void MainForm_ResizeBegin( object sender, EventArgs e )
-        {
-            this.Width = this.Width > OriginalFormSize.Width ? this.Width : OriginalFormSize.Width;
-            this.Height = this.Height > OriginalFormSize.Height ? this.Height : OriginalFormSize.Height;    
-        }
-
-        protected override void OnResize( EventArgs e )
+        /*protected override void OnResize( EventArgs e )
         {
             if ( this.Width > OriginalFormSize.Width
                 && this.Height > OriginalFormSize.Height )
                 base.OnResize( e );
+            
         }
-
+        */
+        
 
 
     }

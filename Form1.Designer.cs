@@ -370,7 +370,6 @@
             this.Name = "MainForm";
             this.ShowInTaskbar = false;
             this.Text = "JSP Edit";
-            this.ResizeBegin += new System.EventHandler( this.MainForm_ResizeBegin );
             this.Paint += new System.Windows.Forms.PaintEventHandler( this.MainForm_Paint );
             this.toolStrip1.ResumeLayout( false );
             this.toolStrip1.PerformLayout();
