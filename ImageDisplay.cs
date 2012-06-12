@@ -35,9 +35,6 @@ namespace JspEdit
             if ( Image.Height > this.ClientSize.Height )
                 hR = Image.Height / this.Height;
 
-            if ( wR < 1 || hR < 1 )
-                throw new DataException();
-
 
             if ( wR > 1 || hR > 1 )
             {
