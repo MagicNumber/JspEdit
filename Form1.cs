@@ -38,7 +38,6 @@ namespace JspEdit
             {
                 var G = pictureBox1.CreateGraphics();
                 G.DrawImage( output.Images[SelectedImage].ToBitmap(), 0, 0 );
-
             }
 
         }
@@ -53,16 +52,19 @@ namespace JspEdit
             {
                 LoadJSP( dialog.FileName );
             }
-            this.Invalidate();
+            this.Refresh();
         }
 
         private void LoadJSP( string name )
         {
-            output = JSPFactory.Load(
+            using ( var fh = 
                 new System.IO.BinaryReader(
-                    new System.IO.FileStream( name, System.IO.FileMode.Open )
+                        new System.IO.FileStream( name, System.IO.FileMode.Open ) 
                     )
-                );
+                  )
+            {
+                output = JSPFactory.Load( fh );
+            }
             HeightBox.Text = output.Images[0].Width.ToString();
             WidthBox.Text = output.Images[0].Height.ToString();
 
@@ -70,21 +72,24 @@ namespace JspEdit
 
             int heightSoFar = 0;
 
+            ThumbnailList.ForEach( I => I.Dispose() );
+            ThumbnailList.Clear();
+            
             for ( int i = 0; i < output.Images.Count; i++ )
             {
                 Bitmap orig = output.Images[i].ToBitmap();
 
                 ImageDisplay img = new ImageDisplay();
                 img.Image = orig;
-                img.Width = panel1.Width;
-                img.Height = panel1.Width;
+                img.Width = panel1.ClientSize.Width;
+                img.Height = img.Width;
                 img.Top = heightSoFar;
                 heightSoFar += img.Height + ThumbnailPadding;
                 ThumbnailList.Add( img );
                 panel1.Controls.Add( img );
                 img.Click += new EventHandler( ThumbnailClick );
             }
-            panel1.Invalidate();
+            panel1.Refresh();
             label1.Text = output.Images.Count.ToString();
 
             SelectedImage = 0;
@@ -92,7 +97,13 @@ namespace JspEdit
 
         void ThumbnailClick( object sender, EventArgs e )
         {
-
+            if ( sender is ImageDisplay )
+            {
+                ThumbnailList[SelectedImage].BackColor = this.BackColor;
+                SelectedImage = ThumbnailList.IndexOf( (ImageDisplay) sender );
+                ThumbnailList[SelectedImage].BackColor = Color.Yellow;
+                this.Refresh();
+            }
         }
     }
 
