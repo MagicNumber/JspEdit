@@ -13,7 +13,15 @@ namespace JspEdit
     {
         readonly Size thumbnailSize = new Size( 1000, 48 );
         readonly Size OriginalFormSize;
-        //readonly 
+        readonly int ThumbnailPadding = 5; // Padding between items in the list of thumbnails.
+
+        /// <summary>
+        /// The number of the image we're looking at ATM. 
+        /// </summary>
+        int SelectedImage = 0;
+
+        List<ImageDisplay> ThumbnailList = new List<ImageDisplay>();
+
 
         public MainForm()
         {
@@ -29,13 +37,8 @@ namespace JspEdit
             if ( output != null )
             {
                 var G = pictureBox1.CreateGraphics();
-                //int w = 0;
-                /*for ( int i = 0; i < output.Images.Count; i++ )
-                {*/
-                int i = 0;
-                    G.DrawImage( output.Images[i].ToBitmap(), 0, 0 );
-                   // w += output.Images[i].Width;
-                //}
+                G.DrawImage( output.Images[SelectedImage].ToBitmap(), 0, 0 );
+
             }
 
         }
@@ -67,32 +70,30 @@ namespace JspEdit
 
             int heightSoFar = 0;
 
-            for (int i = 0; i < output.Images.Count; i++)
-			{
+            for ( int i = 0; i < output.Images.Count; i++ )
+            {
                 Bitmap orig = output.Images[i].ToBitmap();
-               
+
                 ImageDisplay img = new ImageDisplay();
                 img.Image = orig;
                 img.Width = panel1.Width;
                 img.Height = panel1.Width;
                 img.Top = heightSoFar;
-                heightSoFar += img.Height;
+                heightSoFar += img.Height + ThumbnailPadding;
+                ThumbnailList.Add( img );
                 panel1.Controls.Add( img );
+                img.Click += new EventHandler( ThumbnailClick );
             }
             panel1.Invalidate();
             label1.Text = output.Images.Count.ToString();
+
+            SelectedImage = 0;
         }
 
-        /*protected override void OnResize( EventArgs e )
+        void ThumbnailClick( object sender, EventArgs e )
         {
-            if ( this.Width > OriginalFormSize.Width
-                && this.Height > OriginalFormSize.Height )
-                base.OnResize( e );
-            
+
         }
-        */
-        
-
-
     }
+
 }
