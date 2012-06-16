@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
 
 namespace JspEdit
 {
@@ -57,14 +58,29 @@ namespace JspEdit
 
         private void LoadJSP( string name )
         {
-            using ( var fh = 
-                new System.IO.BinaryReader(
-                        new System.IO.FileStream( name, System.IO.FileMode.Open ) 
-                    )
-                  )
+            try
             {
-                output = JSPFactory.Load( fh );
+                using ( var fh = new BinaryReader(
+                            new FileStream( name, FileMode.Open )
+                        )
+                      )
+                {
+                    output = JSPFactory.Load( fh );
+                }
             }
+            catch ( Exception e )
+            {
+#if !DEBUG
+                if ( e is InvalidDataException || e is IOException )
+                {
+                    MessageBox.Show( "This wasn't a valid JSP file." );
+                    return;
+                }
+                else
+#endif
+                    throw;
+            }
+
             HeightBox.Text = output.Images[0].Width.ToString();
             WidthBox.Text = output.Images[0].Height.ToString();
 
@@ -90,9 +106,8 @@ namespace JspEdit
                 img.Click += new EventHandler( ThumbnailClick );
             }
             panel1.Refresh();
-            label1.Text = output.Images.Count.ToString();
-
             SelectedImage = 0;
+            label1.Text = string.Format( "Sprite {0} of {1}", SelectedImage+1, output.Images.Count.ToString() );
         }
 
         void ThumbnailClick( object sender, EventArgs e )
@@ -103,6 +118,7 @@ namespace JspEdit
                 SelectedImage = ThumbnailList.IndexOf( (ImageDisplay) sender );
                 ThumbnailList[SelectedImage].BackColor = Color.Yellow;
                 this.Refresh();
+                label1.Text = string.Format( "Sprite {0} of {1}", SelectedImage+1, output.Images.Count.ToString() );
             }
         }
     }
