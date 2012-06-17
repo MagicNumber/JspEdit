@@ -73,7 +73,22 @@ namespace JspEdit
 #if !DEBUG
                 if ( e is InvalidDataException || e is IOException )
                 {
-                    MessageBox.Show( "This wasn't a valid JSP file." );
+                    try
+                    {
+                        string filename = string.Format( "error_{0}.txt", DateTime.Today );
+                        using ( var f = File.AppendText( filename ) )
+                        {
+                            f.WriteLine( "On filename " + name );
+                            f.WriteLine( e.Message );
+                            f.Write( e.StackTrace );
+                        }
+                        MessageBox.Show( "That wasn't a valid JSP file. (Or there's a bug in the reading code) We wrote out the error to " + filename );
+                    }
+                    catch ( IOException veryBadE )
+                    {
+                        MessageBox.Show( "That wasn't a valid JSP, and something broke when we tried to write out an error." );
+                        return;
+                    }
                     return;
                 }
                 else
