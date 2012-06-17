@@ -353,7 +353,7 @@ namespace JspEdit
                 Marshal.Copy(
                 source: bitdata,
                 startIndex: n*numBytesPerRow,
-                destination: imgdata.Scan0 + n*imgdata.Stride,
+                destination: new IntPtr(imgdata.Scan0.ToInt64() + n*imgdata.Stride),
                 length: numBytesPerRow
                 );
             }
