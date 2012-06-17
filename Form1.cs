@@ -128,7 +128,38 @@ namespace JspEdit
                 ThumbnailList[SelectedImage].BackColor = Color.Yellow;
                 this.Refresh();
                 label1.Text = string.Format( "Sprite {0} of {1}", SelectedImage+1, output.Images.Count.ToString() );
+
+                WidthBox.Text = output.Images[SelectedImage].Width.ToString();
+                HeightBox.Text = output.Images[SelectedImage].Height.ToString();
+                ofXBox.Text = output.Images[SelectedImage].OfsX.ToString();
+                ofYBox.Text = output.Images[SelectedImage].OfsY.ToString();
             }
+        }
+
+        private void ofXBox_TextChanged( object sender, EventArgs e )
+        {
+            if ( !( sender is TextBox ) ) return;
+            TextBox tbox = (TextBox) sender;
+
+            int firstNonNumber = 0;
+            for (firstNonNumber = 0; firstNonNumber < tbox.Text.Length; firstNonNumber++ )
+            {
+                if ( !"01234567890-".Contains( tbox.Text[firstNonNumber].ToString() ) )
+                    break;
+            }
+            tbox.Text = tbox.Text.Substring( 0, firstNonNumber );
+
+            short offX, offY;
+
+            if ( short.TryParse( ofXBox.Text, out offX ) && short.TryParse( ofYBox.Text, out offY ) )
+            {
+                output.Images[SelectedImage].SetOffSet( offX, offY );
+            }
+            else
+            {
+                MessageBox.Show( "Something's gone wrong; a non-number slipped into the offset value boxes." );
+            }
+            
         }
     }
 
