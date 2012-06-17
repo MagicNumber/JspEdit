@@ -116,7 +116,7 @@ namespace JspEdit
             }
             panel1.Refresh();
             SelectedImage = 0;
-            label1.Text = string.Format( "Sprite {0} of {1}", SelectedImage+1, output.Images.Count.ToString() );
+            ThumbnailClick( ThumbnailList[0], EventArgs.Empty ); // Load the first thumbnail automatically. 
         }
 
         void ThumbnailClick( object sender, EventArgs e )
