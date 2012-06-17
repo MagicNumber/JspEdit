@@ -151,7 +151,8 @@ namespace JspEdit
 
             short offX, offY;
 
-            if ( short.TryParse( ofXBox.Text, out offX ) && short.TryParse( ofYBox.Text, out offY ) )
+            if ( !string.IsNullOrEmpty( ofXBox.Text ) && !string.IsNullOrEmpty( ofYBox.Text ) 
+                &&  short.TryParse( ofXBox.Text, out offX ) && short.TryParse( ofYBox.Text, out offY ) )
             {
                 output.Images[SelectedImage].SetOffSet( offX, offY );
             }
