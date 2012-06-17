@@ -47,7 +47,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.DelButton = new System.Windows.Forms.Button();
-            this.AddButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.HeightBox = new System.Windows.Forms.TextBox();
@@ -66,15 +65,6 @@
             // toolStrip1
             // 
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size( 24, 24 );
-            this.toolStrip1.Items.AddRange( new System.Windows.Forms.ToolStripItem[] {
-            this.OpenButton,
-            this.SaveButton,
-            this.SaveAsButton,
-            this.toolStripSeparator2,
-            this.ImportButton,
-            this.ExportButton,
-            this.toolStripSeparator1,
-            this.ConfigButton} );
             this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStrip1.Location = new System.Drawing.Point( 0, 0 );
             this.toolStrip1.Name = "toolStrip1";
@@ -108,7 +98,7 @@
             this.SaveAsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.SaveAsButton.Name = "SaveAsButton";
             this.SaveAsButton.Size = new System.Drawing.Size( 28, 28 );
-            this.SaveAsButton.Text = "SaveAs";
+            this.SaveAsButton.Text = "Save As";
             // 
             // toolStripSeparator2
             // 
@@ -118,9 +108,6 @@
             // ImportButton
             // 
             this.ImportButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ImportButton.DropDownItems.AddRange( new System.Windows.Forms.ToolStripItem[] {
-            this.exportToolStripMenuItem,
-            this.importFolderToolStripMenuItem} );
             this.ImportButton.Image = ( (System.Drawing.Image) ( resources.GetObject( "ImportButton.Image" ) ) );
             this.ImportButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ImportButton.Name = "ImportButton";
@@ -130,21 +117,18 @@
             // exportToolStripMenuItem
             // 
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size( 150, 22 );
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size( 152, 22 );
             this.exportToolStripMenuItem.Text = "Import Sprite";
             // 
             // importFolderToolStripMenuItem
             // 
             this.importFolderToolStripMenuItem.Name = "importFolderToolStripMenuItem";
-            this.importFolderToolStripMenuItem.Size = new System.Drawing.Size( 150, 22 );
+            this.importFolderToolStripMenuItem.Size = new System.Drawing.Size( 152, 22 );
             this.importFolderToolStripMenuItem.Text = "Import Folder";
             // 
             // ExportButton
             // 
             this.ExportButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ExportButton.DropDownItems.AddRange( new System.Windows.Forms.ToolStripItem[] {
-            this.exportToolStripMenuItem1,
-            this.exportFolderToolStripMenuItem} );
             this.ExportButton.Image = ( (System.Drawing.Image) ( resources.GetObject( "ExportButton.Image" ) ) );
             this.ExportButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ExportButton.Name = "ExportButton";
@@ -154,13 +138,13 @@
             // exportToolStripMenuItem1
             // 
             this.exportToolStripMenuItem1.Name = "exportToolStripMenuItem1";
-            this.exportToolStripMenuItem1.Size = new System.Drawing.Size( 148, 22 );
+            this.exportToolStripMenuItem1.Size = new System.Drawing.Size( 152, 22 );
             this.exportToolStripMenuItem1.Text = "Export Sprite";
             // 
             // exportFolderToolStripMenuItem
             // 
             this.exportFolderToolStripMenuItem.Name = "exportFolderToolStripMenuItem";
-            this.exportFolderToolStripMenuItem.Size = new System.Drawing.Size( 148, 22 );
+            this.exportFolderToolStripMenuItem.Size = new System.Drawing.Size( 152, 22 );
             this.exportFolderToolStripMenuItem.Text = "Export JSP";
             // 
             // toolStripSeparator1
@@ -172,10 +156,9 @@
             // 
             this.ConfigButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.ConfigButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ConfigButton.Image = ( (System.Drawing.Image) ( resources.GetObject( "ConfigButton.Image" ) ) );
             this.ConfigButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ConfigButton.Name = "ConfigButton";
-            this.ConfigButton.Size = new System.Drawing.Size( 40, 28 );
+            this.ConfigButton.Size = new System.Drawing.Size( 16, 28 );
             this.ConfigButton.Text = "Configuration";
             this.ConfigButton.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             // 
@@ -213,24 +196,13 @@
             // DelButton
             // 
             this.DelButton.Anchor = ( (System.Windows.Forms.AnchorStyles) ( ( System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left ) ) );
-            this.DelButton.BackgroundImage = global::JspEdit.Properties.Resources.edit_remove;
-            this.DelButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.DelButton.BackgroundImage = ( (System.Drawing.Image) ( resources.GetObject( "DelButton.BackgroundImage" ) ) );
+            this.DelButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.DelButton.Location = new System.Drawing.Point( 12, 507 );
             this.DelButton.Name = "DelButton";
             this.DelButton.Size = new System.Drawing.Size( 32, 32 );
             this.DelButton.TabIndex = 5;
             this.DelButton.UseVisualStyleBackColor = true;
-            // 
-            // AddButton
-            // 
-            this.AddButton.Anchor = ( (System.Windows.Forms.AnchorStyles) ( ( System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left ) ) );
-            this.AddButton.BackgroundImage = global::JspEdit.Properties.Resources.edit_add;
-            this.AddButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.AddButton.Location = new System.Drawing.Point( 12, 469 );
-            this.AddButton.Name = "AddButton";
-            this.AddButton.Size = new System.Drawing.Size( 32, 32 );
-            this.AddButton.TabIndex = 5;
-            this.AddButton.UseVisualStyleBackColor = true;
             // 
             // label2
             // 
@@ -361,7 +333,6 @@
             this.Controls.Add( this.HeightBox );
             this.Controls.Add( this.label3 );
             this.Controls.Add( this.label2 );
-            this.Controls.Add( this.AddButton );
             this.Controls.Add( this.DelButton );
             this.Controls.Add( this.button2 );
             this.Controls.Add( this.button1 );
@@ -398,7 +369,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button DelButton;
-        private System.Windows.Forms.Button AddButton;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox HeightBox;

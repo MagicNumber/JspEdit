@@ -60,12 +60,10 @@ namespace JspEdit
         {
             try
             {
-                using ( var fh = new BinaryReader(
-                            new FileStream( name, FileMode.Open )
-                        )
-                      )
+                using ( FileStream fs = new FileStream( name, FileMode.Open ))
+                using ( BinaryReader br = new BinaryReader( fs ) )
                 {
-                    output = JSPFactory.Load( fh );
+                    output = JSPFactory.Load( br );
                 }
             }
             catch ( Exception e )
