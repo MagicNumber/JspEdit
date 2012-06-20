@@ -343,7 +343,7 @@ namespace JspEdit
 
             // OK, this turned out to be more complicated than it looked. We need to blit the data per row, instead of all at once.
             // See http://bobpowell.net/lockingbits.htm
-            var imgdata = B.LockBits( new Rectangle( 0, 0, Width, Height ), ImageLockMode.WriteOnly, PixelFormat.Format24bppRgb );
+            BitmapData imgdata = B.LockBits( new Rectangle( 0, 0, Width, Height ), ImageLockMode.WriteOnly, PixelFormat.Format24bppRgb );
 
             int numRows = B.Height;
             int numBytesPerRow = B.Width * 3;

@@ -67,15 +67,16 @@ namespace JspEdit
         {
             try
             {
-                using ( FileStream fs = new FileStream( name, FileMode.Open ))
+                using ( FileStream fs = new FileStream( name, FileMode.Open ) )
                 using ( BinaryReader br = new BinaryReader( fs ) )
                 {
                     output = JSPFactory.Load( br );
                 }
             }
+#if !DEBUG
             catch ( Exception e )
             {
-#if !DEBUG
+
                 if ( e is InvalidDataException || e is IOException )
                 {
                     try
@@ -91,8 +92,12 @@ namespace JspEdit
                     return;
                 }
                 else
-#endif
+
                     throw;
+            }
+#endif // We want an error to go up to the debugger if it's there, but if it's not there handle it.
+            finally
+            {
             }
 
             HeightBox.Text = output.Images[0].Width.ToString();
