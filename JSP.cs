@@ -316,8 +316,8 @@ namespace JspEdit
 
         public void SetData( byte[] newData )
         {
-            //if ( newData.Length != ( Width * Height ) )
-                //throw new ArgumentException( "Data wrong length" );
+            if ( newData.Length != ( Width * Height ) )
+                throw new ArgumentException( "Data wrong length" );
             
             this.Data = newData;
         }
