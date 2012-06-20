@@ -123,7 +123,7 @@ namespace JspEdit
                 ThumbnailList[SelectedImage].BackColor = Color.White;
                 SelectedImage = ThumbnailList.IndexOf( (ImageDisplay) sender );
                 ThumbnailList[SelectedImage].BackColor = Color.Yellow;
-                this.Refresh();
+                
                 label1.Text = string.Format( "Sprite {0} of {1}", SelectedImage+1, output.Images.Count.ToString() );
 
                 WidthBox.Text = output.Images[SelectedImage].Width.ToString();
@@ -132,7 +132,13 @@ namespace JspEdit
                 ofYBox.Text = output.Images[SelectedImage].OfsY.ToString();
 
                 mainDisplayArea.Image = output.Images[SelectedImage];
+                this.Refresh();
             }
+        }
+
+        private void panel1_MouseWheel( object sender, MouseEventArgs e )
+        {
+            panel1.VerticalScroll.Value += ( e.Delta / 120 ) * SystemInformation.MouseWheelScrollLines;
         }
 
         private void ofXBox_TextChanged( object sender, EventArgs e )
@@ -160,7 +166,7 @@ namespace JspEdit
                 if (!string.IsNullOrEmpty( ofXBox.Text ) && !string.IsNullOrEmpty( ofYBox.Text ))
                 MessageBox.Show( "Something's gone wrong; a non-number slipped into the offset value boxes." );
             }
-            
+            this.Refresh();
         }
     }
 

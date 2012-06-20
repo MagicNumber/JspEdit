@@ -264,7 +264,6 @@
             this.ofYBox.BackColor = System.Drawing.Color.White;
             this.ofYBox.Location = new System.Drawing.Point( 556, 79 );
             this.ofYBox.Name = "ofYBox";
-            this.ofYBox.ReadOnly = true;
             this.ofYBox.Size = new System.Drawing.Size( 100, 20 );
             this.ofYBox.TabIndex = 13;
             this.ofYBox.TextChanged += new System.EventHandler( this.ofXBox_TextChanged );
@@ -275,7 +274,6 @@
             this.ofXBox.BackColor = System.Drawing.Color.White;
             this.ofXBox.Location = new System.Drawing.Point( 556, 48 );
             this.ofXBox.Name = "ofXBox";
-            this.ofXBox.ReadOnly = true;
             this.ofXBox.Size = new System.Drawing.Size( 100, 20 );
             this.ofXBox.TabIndex = 12;
             this.ofXBox.TextChanged += new System.EventHandler( this.ofXBox_TextChanged );
@@ -312,6 +310,7 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size( 153, 503 );
             this.panel1.TabIndex = 15;
+            this.panel1.MouseWheel += new System.Windows.Forms.MouseEventHandler( panel1_MouseWheel );
             // 
             // mainDisplayArea
             // 
