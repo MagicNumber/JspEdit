@@ -65,7 +65,6 @@ namespace JspEdit
                     offsetX = this.Width / 2;
                     offsetY = this.Height / 2;
                 }
-
                 e.Graphics.DrawImage( this.Image, offsetX, offsetY, newWidth, newHeight );
             }
         }

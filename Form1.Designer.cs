@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager( typeof( MainForm ) );
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.OpenButton = new System.Windows.Forms.ToolStripButton();
@@ -55,7 +54,6 @@
             this.ofXBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.imageList1 = new System.Windows.Forms.ImageList( this.components );
             this.panel1 = new System.Windows.Forms.Panel();
             this.mainDisplayArea = new JspEdit.ImageDisplay();
             this.toolStrip1.SuspendLayout();
@@ -304,12 +302,6 @@
             this.label5.TabIndex = 10;
             this.label5.Text = "Origin X";
             // 
-            // imageList1
-            // 
-            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageList1.ImageSize = new System.Drawing.Size( 16, 16 );
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            // 
             // panel1
             // 
             this.panel1.Anchor = ( (System.Windows.Forms.AnchorStyles) ( ( ( System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom )
@@ -394,7 +386,6 @@
         private System.Windows.Forms.TextBox ofXBox;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.Panel panel1;
         private ImageDisplay mainDisplayArea;
 
