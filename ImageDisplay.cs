@@ -77,14 +77,13 @@ namespace JspEdit
                 int offsetY = 0;
                 if ( Centered )
                 {
-                    offsetX = this.Width / 2;
-                    offsetY = this.Height / 2;
+                    e.Graphics.TranslateTransform( this.Width / 2, this.Height / 2 );
                 }
 
                 if ( DrawOrigin )
                 {
-                    e.Graphics.DrawLine( Pens.Black, offsetX - 5, offsetY, offsetX + 5, offsetY );
-                    e.Graphics.DrawLine( Pens.Black, offsetX, offsetY - 5, offsetX, offsetY + 5 );
+                    e.Graphics.DrawLine( Pens.Black, -5, 0, +5, 0 );
+                    e.Graphics.DrawLine( Pens.Black, 0, -5, 0, +5 );
                 }
 
                 if ( Centered )
@@ -92,7 +91,7 @@ namespace JspEdit
                     offsetX += Image.OfsX;
                     offsetY += Image.OfsY;
                 }
-
+                
                 e.Graphics.DrawImage( this.Render, offsetX, offsetY, newWidth, newHeight );
             }
         }
