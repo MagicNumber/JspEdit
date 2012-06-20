@@ -6,26 +6,41 @@ namespace JspEdit
 {
     public partial class ImageDisplay : UserControl
     {
-        public Image Image
+        private JSPImage _image;
+        public JSPImage Image
         {
-            get;
-            set;
+            get
+            {
+                return _image;
+            }
+            set
+            {
+                _image = value; 
+                if (_image != null)
+                    _render = _image.ToBitmap();
+            }
         }
-        public int offsX
+
+        protected Image _render;
+        public Image Render
         {
-            get;
-            set;
+            get
+            {
+                return _render;
+            }
         }
-        public int offsY
-        {
-            get;
-            set;
-        }
+
         public bool Centered
         {
             get;
             set;
         }
+        public bool DrawOrigin
+        {
+            get;
+            set;
+        }
+
 
         public ImageDisplay()
         {
@@ -58,14 +73,27 @@ namespace JspEdit
                     newHeight = Image.Height;
                 }
 
-                int offsetX = this.offsX;
-                int offsetY = this.offsY;
+                int offsetX = 0;
+                int offsetY = 0;
                 if ( Centered )
                 {
                     offsetX = this.Width / 2;
                     offsetY = this.Height / 2;
                 }
-                e.Graphics.DrawImage( this.Image, offsetX, offsetY, newWidth, newHeight );
+
+                if ( DrawOrigin )
+                {
+                    e.Graphics.DrawLine( Pens.Black, offsetX - 5, offsetY, offsetX + 5, offsetY );
+                    e.Graphics.DrawLine( Pens.Black, offsetX, offsetY - 5, offsetX, offsetY + 5 );
+                }
+
+                if ( Centered )
+                {
+                    offsetX += Image.OfsX;
+                    offsetY += Image.OfsY;
+                }
+
+                e.Graphics.DrawImage( this.Render, offsetX, offsetY, newWidth, newHeight );
             }
         }
     }

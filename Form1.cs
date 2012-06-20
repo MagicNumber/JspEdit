@@ -10,7 +10,7 @@ namespace JspEdit
     {
         readonly Size thumbnailSize = new Size( 1000, 48 );
         readonly Size OriginalFormSize;
-        readonly int ThumbnailPadding = 5; // Padding between items in the list of thumbnails.
+        readonly int ThumbnailPadding = 10; // Padding between items in the list of thumbnails.
 
         /// <summary>
         /// The number of the image we're looking at ATM. 
@@ -99,10 +99,10 @@ namespace JspEdit
             
             for ( int i = 0; i < output.Images.Count; i++ )
             {
-                Bitmap orig = output.Images[i].ToBitmap();
-
                 ImageDisplay img = new ImageDisplay();
-                img.Image = orig;
+                img.Image = output.Images[i];
+                img.Centered = false;
+                img.DrawOrigin = false;
                 img.Width = panel1.ClientSize.Width;
                 img.Height = img.Width;
                 img.Top = heightSoFar;
@@ -120,7 +120,7 @@ namespace JspEdit
         {
             if ( sender is ImageDisplay )
             {
-                ThumbnailList[SelectedImage].BackColor = this.BackColor;
+                ThumbnailList[SelectedImage].BackColor = Color.White;
                 SelectedImage = ThumbnailList.IndexOf( (ImageDisplay) sender );
                 ThumbnailList[SelectedImage].BackColor = Color.Yellow;
                 this.Refresh();
@@ -131,7 +131,7 @@ namespace JspEdit
                 ofXBox.Text = output.Images[SelectedImage].OfsX.ToString();
                 ofYBox.Text = output.Images[SelectedImage].OfsY.ToString();
 
-                mainDisplayArea.Image = output.Images[SelectedImage].ToBitmap();
+                mainDisplayArea.Image = output.Images[SelectedImage];
             }
         }
 

@@ -321,11 +321,10 @@
             this.mainDisplayArea.BackColor = System.Drawing.Color.White;
             this.mainDisplayArea.BackgroundImage = ( (System.Drawing.Image) ( resources.GetObject( "mainDisplayArea.BackgroundImage" ) ) );
             this.mainDisplayArea.Centered = true;
+            this.mainDisplayArea.DrawOrigin = true;
             this.mainDisplayArea.Image = null;
             this.mainDisplayArea.Location = new System.Drawing.Point( 210, 105 );
             this.mainDisplayArea.Name = "mainDisplayArea";
-            this.mainDisplayArea.offsX = 0;
-            this.mainDisplayArea.offsY = 0;
             this.mainDisplayArea.Size = new System.Drawing.Size( 572, 434 );
             this.mainDisplayArea.TabIndex = 16;
             // 

@@ -6,12 +6,12 @@ using System.Runtime.InteropServices;
 
 namespace JspEdit
 {
-    class JSP
+    public class JSP
     {
         public List<JSPImage> Images = new List<JSPImage>();
     }
 
-    class JSPImage
+    public class JSPImage
     {
         #region Colors
         public static readonly Color[] colors = new Color[]{
