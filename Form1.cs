@@ -33,7 +33,7 @@ namespace JspEdit
         {
             if ( output != null )
             {
-                var G = pictureBox1.CreateGraphics();
+                var G = mainDisplayArea.CreateGraphics();
                 G.DrawImage( output.Images[SelectedImage].ToBitmap(), 0, 0 );
             }
 
@@ -69,8 +69,14 @@ namespace JspEdit
                 {
                     try
                     {
-                        string filename = string.Format( "error_{0}.txt", DateTime.Today );
-                        using ( var f = File.AppendText( filename ) )
+                        
+                        string filename = string.Format( "error_{0}{1}{2}.txt", DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
+
+                        string path = Environment.CommandLine.Substring( 1, Environment.CommandLine.LastIndexOf( '\\' ) );
+                        // Because the FileSelect dialog changes the cwd, we need to grab it from arg[0]
+                        // Start from index 1 to get rid of a leading quote mark
+
+                        using ( StreamWriter f = new StreamWriter( path + "\\" + filename, true) )
                         {
                             f.WriteLine( "On filename " + name );
                             f.WriteLine( e.Message );
