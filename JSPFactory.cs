@@ -122,31 +122,38 @@ namespace JspEdit
             {
                 datas.Insert( imIndex, new List<byte>() );
 
-                byte currentLen = 1; // The length of this block. Begins at 1 because we're skipping the first byte of the stream.
+
+                List<byte> buffer = new List<byte>();
 
                 for ( int dataIndex = 1; // Skip the first byte
                     dataIndex < obj.Images[imIndex].Data.Length; dataIndex++ )
                 {
                     byte curByte = obj.Images[imIndex].Data[dataIndex];
-                    byte prevByte = obj.Images[imIndex].Data[dataIndex - 1];
+                    byte prevByte = obj.Images[imIndex].Data[dataIndex-1];
 
-                    if ( curByte != prevByte )
+                    if ( curByte == prevByte )
                     {
-                        if ( prevByte == 0 )
-                            datas[imIndex].Add( (byte) ( currentLen | 127 ) );
-                        else
-                        {
-                            datas[imIndex].Add( currentLen );
-                            datas[imIndex].Add( prevByte );
-                        }
+                        buffer.Add( curByte );
                     }
                     else
-                        currentLen++;
+                    {
+                        if ( prevByte == 0 ) // Transparent blocks get condensed.
+                        {
+                            datas[imIndex].Add( (byte) ( buffer.Count | 128 ) );
+                        }
+                        else
+                        {
+                            datas[imIndex].Add( (byte) buffer.Count );
+                            datas[imIndex].AddRange( buffer );
+                            buffer = new List<byte>();
+                        }
+                    }
+
                 }
             }
 
 
-            stdout.Write( (byte) obj.Images.Count );
+            stdout.Write( (ushort) obj.Images.Count );
             for ( int i = 0; i < obj.Images.Count; i++ )
             {
                 var im = obj.Images[i];
@@ -155,6 +162,7 @@ namespace JspEdit
                 stdout.Write( (short) im.OfsX );
                 stdout.Write( (short) im.OfsY );
                 stdout.Write( (short) datas[i].Count );
+                stdout.Write( (int) 0 ); // Write four blank bytes. Because that's what the spec says.
             }
             for ( int j = 0; j < obj.Images.Count; j++ )
             {
