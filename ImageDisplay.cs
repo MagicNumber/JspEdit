@@ -73,8 +73,7 @@ namespace JspEdit
                     newHeight = Image.Height;
                 }
 
-                int offsetX = 0;
-                int offsetY = 0;
+               
                 if ( Centered )
                 {
                     e.Graphics.TranslateTransform( this.Width / 2, this.Height / 2 );
@@ -86,6 +85,8 @@ namespace JspEdit
                     e.Graphics.DrawLine( Pens.Black, 0, -5, 0, +5 );
                 }
 
+                int offsetX = 0;
+                int offsetY = 0;
                 if ( Centered )
                 {
                     offsetX += Image.OfsX;
