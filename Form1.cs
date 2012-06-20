@@ -19,6 +19,7 @@ namespace JspEdit
 
         List<ImageDisplay> ThumbnailList = new List<ImageDisplay>();
 
+        string FilePath;
 
         public MainForm()
         {
@@ -39,7 +40,9 @@ namespace JspEdit
             if ( result == System.Windows.Forms.DialogResult.OK )
             {
                 LoadJSP( dialog.FileName );
+                FilePath = dialog.FileName;
             }
+            
             this.Refresh();
         }
 
@@ -167,6 +170,12 @@ namespace JspEdit
                 MessageBox.Show( "Something's gone wrong; a non-number slipped into the offset value boxes." );
             }
             this.Refresh();
+        }
+
+        private void SaveButton_Click( object sender, EventArgs e )
+        {
+            /*using (StreamWriter sw = new StreamWriter(FilePath))
+            JSPFactory.Save( output, sw.BaseStream );*/
         }
     }
 

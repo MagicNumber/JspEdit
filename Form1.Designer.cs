@@ -96,6 +96,7 @@
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Size = new System.Drawing.Size( 28, 28 );
             this.SaveButton.Text = "Save";
+            this.SaveButton.Click += new System.EventHandler( this.SaveButton_Click );
             // 
             // SaveAsButton
             // 
@@ -310,7 +311,7 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size( 153, 503 );
             this.panel1.TabIndex = 15;
-            this.panel1.MouseWheel += new System.Windows.Forms.MouseEventHandler( panel1_MouseWheel );
+            this.panel1.MouseWheel += new System.Windows.Forms.MouseEventHandler( this.panel1_MouseWheel );
             // 
             // mainDisplayArea
             // 
