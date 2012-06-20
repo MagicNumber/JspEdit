@@ -115,10 +115,51 @@ namespace JspEdit
             return Collection;
         }
 
-        public static void Save( JSP obj, Stream sout )
+        public static void Save( JSP obj, BinaryWriter stdout )
         {
+            List<List<byte>> datas = new List<List<byte>>();
+            for ( int imIndex = 0; imIndex < obj.Images.Count; imIndex++ )
+            {
+                datas.Insert( imIndex, new List<byte>() );
 
-            return;
+                byte currentLen = 1; // The length of this block. Begins at 1 because we're skipping the first byte of the stream.
+
+                for ( int dataIndex = 1; // Skip the first byte
+                    dataIndex < obj.Images[imIndex].Data.Length; dataIndex++ )
+                {
+                    byte curByte = obj.Images[imIndex].Data[dataIndex];
+                    byte prevByte = obj.Images[imIndex].Data[dataIndex - 1];
+
+                    if ( curByte != prevByte )
+                    {
+                        if ( prevByte == 0 )
+                            datas[imIndex].Add( (byte) ( currentLen | 127 ) );
+                        else
+                        {
+                            datas[imIndex].Add( currentLen );
+                            datas[imIndex].Add( prevByte );
+                        }
+                    }
+                    else
+                        currentLen++;
+                }
+            }
+
+
+            stdout.Write( (byte) obj.Images.Count );
+            for ( int i = 0; i < obj.Images.Count; i++ )
+            {
+                var im = obj.Images[i];
+                stdout.Write( (ushort) im.Width );
+                stdout.Write( (ushort) im.Height );
+                stdout.Write( (short) im.OfsX );
+                stdout.Write( (short) im.OfsY );
+                stdout.Write( (short) datas[i].Count );
+            }
+            for ( int j = 0; j < obj.Images.Count; j++ )
+            {
+                stdout.Write( datas[j].ToArray() );
+            }
         }
 
     }
