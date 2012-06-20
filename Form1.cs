@@ -158,6 +158,7 @@ namespace JspEdit
             }
             else
             {
+                if (!string.IsNullOrEmpty( ofXBox.Text ) && !string.IsNullOrEmpty( ofYBox.Text ))
                 MessageBox.Show( "Something's gone wrong; a non-number slipped into the offset value boxes." );
             }
             
