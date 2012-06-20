@@ -8,7 +8,7 @@ namespace JspEdit
 {
     public partial class MainForm : Form
     {
-        readonly Size thumbnailSize = new Size( 1000, 48 );
+        readonly Size ThumbnailSize = new Size( 1000, 48 );
         readonly Size OriginalFormSize;
         readonly int ThumbnailPadding = 10; // Padding between items in the list of thumbnails.
 
@@ -20,6 +20,7 @@ namespace JspEdit
         List<ImageDisplay> ThumbnailList = new List<ImageDisplay>();
 
         string FilePath;
+        string ErrorFilename = string.Format( "error_{0}{1}{2}.txt", DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day );
 
         public MainForm()
         {
@@ -46,6 +47,22 @@ namespace JspEdit
             this.Refresh();
         }
 
+        private void WriteExceptionToFile(Exception e)
+        {
+            string filename = string.Format( "error_{0}{1}{2}.txt", DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day );
+
+            string path = Environment.CommandLine.Substring( 1, Environment.CommandLine.LastIndexOf( '\\' ) );
+            // Because the FileSelect dialog changes the cwd, we need to grab it from arg[0]
+            // Start from index 1 to get rid of a leading quote mark
+
+            using ( StreamWriter f = new StreamWriter( path + "\\" + filename, true ) )
+            {
+                f.WriteLine( e.Message );
+                f.Write( e.StackTrace );
+            }
+        }
+
+
         private void LoadJSP( string name )
         {
             try
@@ -63,20 +80,8 @@ namespace JspEdit
                 {
                     try
                     {
-                        
-                        string filename = string.Format( "error_{0}{1}{2}.txt", DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
-
-                        string path = Environment.CommandLine.Substring( 1, Environment.CommandLine.LastIndexOf( '\\' ) );
-                        // Because the FileSelect dialog changes the cwd, we need to grab it from arg[0]
-                        // Start from index 1 to get rid of a leading quote mark
-
-                        using ( StreamWriter f = new StreamWriter( path + "\\" + filename, true) )
-                        {
-                            f.WriteLine( "On filename " + name );
-                            f.WriteLine( e.Message );
-                            f.Write( e.StackTrace );
-                        }
-                        MessageBox.Show( "That wasn't a valid JSP file. (Or there's a bug in the reading code) We wrote out the error to " + filename );
+                        WriteExceptionToFile(e);
+                        MessageBox.Show( "That wasn't a valid JSP file. (Or there's a bug in the reading code) We wrote out the error to " + ErrorFilename );
                     }
                     catch ( IOException veryBadE )
                     {
@@ -174,8 +179,26 @@ namespace JspEdit
 
         private void SaveButton_Click( object sender, EventArgs e )
         {
-            /*using (StreamWriter sw = new StreamWriter(FilePath))
-            JSPFactory.Save( output, sw.BaseStream );*/
+            try
+            {
+                using ( FileStream fs = new FileStream( FilePath, FileMode.Open ) )
+                using ( BinaryWriter bw = new BinaryWriter( fs ) )
+                {
+                    JSPFactory.Save( output, bw );
+                }
+            }
+            catch ( IOException ex )
+            {
+                try
+                {
+                    WriteExceptionToFile( ex );
+                    MessageBox.Show( "Save failed. We've wrote out the details to " + ErrorFilename );
+                }
+                catch ( IOException vbex )
+                {
+                    MessageBox.Show( "Save failed. We tried to write out the details, but that failed too." );
+                }
+            }
         }
     }
 
