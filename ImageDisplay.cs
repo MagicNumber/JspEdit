@@ -11,7 +11,21 @@ namespace JspEdit
             get;
             set;
         }
-
+        public int offsX
+        {
+            get;
+            set;
+        }
+        public int offsY
+        {
+            get;
+            set;
+        }
+        public bool Centered
+        {
+            get;
+            set;
+        }
 
         public ImageDisplay()
         {
@@ -22,27 +36,38 @@ namespace JspEdit
         {
             base.OnPaint( e );
 
-            int newWidth = 0, newHeight = 0;
-            float wR = 1, hR = 1;
-
-            if ( Image.Width > this.ClientSize.Width )
-                wR = Image.Width / (float) this.Width;
-            if ( Image.Height > this.ClientSize.Height )
-                hR = Image.Height / (float) this.Height;
-
-
-            if ( wR > 1 || hR > 1 )
+            if ( Image != null )
             {
-                newWidth = (int) ( Image.Width / Math.Max( wR, hR ) );
-                newHeight = (int) ( Image.Height / Math.Max( wR, hR ) );
-            }
-            else
-            {
-                newWidth = Image.Width;
-                newHeight = Image.Height;
-            }
+                int newWidth = 0, newHeight = 0;
+                float wR = 1, hR = 1;
 
-            e.Graphics.DrawImage( this.Image, 0, 0, newWidth, newHeight );
+                if ( Image.Width > this.ClientSize.Width )
+                    wR = Image.Width / (float) this.Width;
+                if ( Image.Height > this.ClientSize.Height )
+                    hR = Image.Height / (float) this.Height;
+
+
+                if ( wR > 1 || hR > 1 )
+                {
+                    newWidth = (int) ( Image.Width / Math.Max( wR, hR ) );
+                    newHeight = (int) ( Image.Height / Math.Max( wR, hR ) );
+                }
+                else
+                {
+                    newWidth = Image.Width;
+                    newHeight = Image.Height;
+                }
+
+                int offsetX = this.offsX;
+                int offsetY = this.offsY;
+                if ( Centered )
+                {
+                    offsetX = this.Width / 2;
+                    offsetY = this.Height / 2;
+                }
+
+                e.Graphics.DrawImage( this.Image, offsetX, offsetY, newWidth, newHeight );
+            }
         }
     }
 }

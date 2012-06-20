@@ -29,15 +29,6 @@ namespace JspEdit
 
         JSP output;
 
-        private void MainForm_Paint( object sender, PaintEventArgs e )
-        {
-            if ( output != null )
-            {
-                var G = mainDisplayArea.CreateGraphics();
-                G.DrawImage( output.Images[SelectedImage].ToBitmap(), 0, 0 );
-            }
-
-        }
 
         private void OpenButton_Click( object sender, EventArgs e )
         {
@@ -139,6 +130,8 @@ namespace JspEdit
                 HeightBox.Text = output.Images[SelectedImage].Height.ToString();
                 ofXBox.Text = output.Images[SelectedImage].OfsX.ToString();
                 ofYBox.Text = output.Images[SelectedImage].OfsY.ToString();
+
+                mainDisplayArea.Image = output.Images[SelectedImage].ToBitmap();
             }
         }
 

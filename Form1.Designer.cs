@@ -55,11 +55,10 @@
             this.ofXBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.mainDisplayArea = new System.Windows.Forms.PictureBox();
             this.imageList1 = new System.Windows.Forms.ImageList( this.components );
             this.panel1 = new System.Windows.Forms.Panel();
+            this.mainDisplayArea = new JspEdit.ImageDisplay();
             this.toolStrip1.SuspendLayout();
-            ( (System.ComponentModel.ISupportInitialize) ( this.mainDisplayArea ) ).BeginInit();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -305,19 +304,6 @@
             this.label5.TabIndex = 10;
             this.label5.Text = "Origin X";
             // 
-            // mainDisplayArea
-            // 
-            this.mainDisplayArea.Anchor = ( (System.Windows.Forms.AnchorStyles) ( ( ( ( System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom )
-                        | System.Windows.Forms.AnchorStyles.Left )
-                        | System.Windows.Forms.AnchorStyles.Right ) ) );
-            this.mainDisplayArea.BackColor = System.Drawing.Color.White;
-            this.mainDisplayArea.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.mainDisplayArea.Location = new System.Drawing.Point( 213, 184 );
-            this.mainDisplayArea.Name = "mainDisplayArea";
-            this.mainDisplayArea.Size = new System.Drawing.Size( 569, 355 );
-            this.mainDisplayArea.TabIndex = 14;
-            this.mainDisplayArea.TabStop = false;
-            // 
             // imageList1
             // 
             this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
@@ -335,13 +321,29 @@
             this.panel1.Size = new System.Drawing.Size( 153, 503 );
             this.panel1.TabIndex = 15;
             // 
+            // mainDisplayArea
+            // 
+            this.mainDisplayArea.Anchor = ( (System.Windows.Forms.AnchorStyles) ( ( ( ( System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom )
+                        | System.Windows.Forms.AnchorStyles.Left )
+                        | System.Windows.Forms.AnchorStyles.Right ) ) );
+            this.mainDisplayArea.BackColor = System.Drawing.Color.White;
+            this.mainDisplayArea.BackgroundImage = ( (System.Drawing.Image) ( resources.GetObject( "mainDisplayArea.BackgroundImage" ) ) );
+            this.mainDisplayArea.Centered = true;
+            this.mainDisplayArea.Image = null;
+            this.mainDisplayArea.Location = new System.Drawing.Point( 210, 105 );
+            this.mainDisplayArea.Name = "mainDisplayArea";
+            this.mainDisplayArea.offsX = 0;
+            this.mainDisplayArea.offsY = 0;
+            this.mainDisplayArea.Size = new System.Drawing.Size( 572, 434 );
+            this.mainDisplayArea.TabIndex = 16;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF( 6F, 13F );
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size( 794, 568 );
-            this.Controls.Add( this.panel1 );
             this.Controls.Add( this.mainDisplayArea );
+            this.Controls.Add( this.panel1 );
             this.Controls.Add( this.ofYBox );
             this.Controls.Add( this.ofXBox );
             this.Controls.Add( this.label4 );
@@ -358,10 +360,8 @@
             this.Name = "MainForm";
             this.ShowInTaskbar = false;
             this.Text = "JSP Edit";
-            this.Paint += new System.Windows.Forms.PaintEventHandler( this.MainForm_Paint );
             this.toolStrip1.ResumeLayout( false );
             this.toolStrip1.PerformLayout();
-            ( (System.ComponentModel.ISupportInitialize) ( this.mainDisplayArea ) ).EndInit();
             this.ResumeLayout( false );
             this.PerformLayout();
 
@@ -394,9 +394,9 @@
         private System.Windows.Forms.TextBox ofXBox;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.PictureBox mainDisplayArea;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.Panel panel1;
+        private ImageDisplay mainDisplayArea;
 
     }
 }
