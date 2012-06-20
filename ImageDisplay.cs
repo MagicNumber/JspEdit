@@ -26,15 +26,15 @@ namespace JspEdit
             float wR = 1, hR = 1;
 
             if ( Image.Width > this.ClientSize.Width )
-                wR = Image.Width / this.Width;
+                wR = Image.Width / (float) this.Width;
             if ( Image.Height > this.ClientSize.Height )
-                hR = Image.Height / this.Height;
+                hR = Image.Height / (float) this.Height;
 
 
             if ( wR > 1 || hR > 1 )
             {
-                newWidth = Image.Width / (int) Math.Max( wR, hR );
-                newHeight = Image.Height / (int) Math.Max( wR, hR );
+                newWidth = (int) ( Image.Width / Math.Max( wR, hR ) );
+                newHeight = (int) ( Image.Height / Math.Max( wR, hR ) );
             }
             else
             {
