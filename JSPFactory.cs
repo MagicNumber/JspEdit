@@ -120,24 +120,33 @@ namespace JspEdit
             List<List<byte>> datas = new List<List<byte>>();
             for ( int imIndex = 0; imIndex < obj.Images.Count; imIndex++ )
             {
-                datas.Insert( imIndex, new List<byte>() );
+                datas.Add( new List<byte>() );
 
 
                 List<byte> buffer = new List<byte>();
+                buffer.Add(obj.Images[imIndex].Data[0]);
 
-                for ( int dataIndex = 1; // Skip the first byte
-                    dataIndex < obj.Images[imIndex].Data.Length; dataIndex++ )
+                for ( int dataIndex = 1; /* Skip the first byte*/ dataIndex < obj.Images[imIndex].Data.Length; dataIndex++ )
                 {
                     byte curByte = obj.Images[imIndex].Data[dataIndex];
                     byte prevByte = obj.Images[imIndex].Data[dataIndex-1];
 
-                    if ( curByte == prevByte )
-                    {
+                    if ( prevByte == 0 && curByte != 0 ) 
+                    { // End of transparent block
+                            datas[imIndex].Add( (byte) ( buffer.Count | 128 ) );
+                            buffer.Clear();
+                            buffer.Add( curByte );
+                    }
+                    else if ( prevByte != 0 && curByte == 0 )
+                    { // End of non-transparent block
+                        datas[imIndex].Add( (byte) buffer.Count );
+                        datas[imIndex].AddRange( buffer );
+                        buffer.Clear();
                         buffer.Add( curByte );
                     }
-                    else
-                    {
-                        if ( prevByte == 0 ) // Transparent blocks get condensed.
+                    else if ( dataIndex % obj.Images[imIndex].Width == 0 && dataIndex > 0)
+                    { // End of row. Begin a new block regardless.
+                        if ( buffer[buffer.Count - 1] == 0 )
                         {
                             datas[imIndex].Add( (byte) ( buffer.Count | 128 ) );
                         }
@@ -145,11 +154,35 @@ namespace JspEdit
                         {
                             datas[imIndex].Add( (byte) buffer.Count );
                             datas[imIndex].AddRange( buffer );
-                            buffer = new List<byte>();
+                        }
+                        buffer.Clear();
+                        buffer.Add( curByte );
+                    }
+                    else
+                    {
+                        buffer.Add( curByte );
+                        if ( curByte == 0 )
+                        {
                         }
                     }
 
                 }
+                if ( buffer[0] == 0 )
+                {
+                    datas[imIndex].Add( (byte)(buffer.Count | 128) );
+                }
+                else
+                {
+                    datas[imIndex].AddRange( buffer );
+                }
+
+                int trans = 0;
+                for ( int i = 0; i < datas[imIndex].Count; i++ )
+                {
+                    if ( datas[imIndex][i] > 127 ) trans++;
+                }
+
+
             }
 
 
@@ -161,7 +194,7 @@ namespace JspEdit
                 stdout.Write( (ushort) im.Height );
                 stdout.Write( (short) im.OfsX );
                 stdout.Write( (short) im.OfsY );
-                stdout.Write( (short) datas[i].Count );
+                stdout.Write( (int) datas[i].Count );
                 stdout.Write( (int) 0 ); // Write four blank bytes. Because that's what the spec says.
             }
             for ( int j = 0; j < obj.Images.Count; j++ )
