@@ -139,11 +139,13 @@ namespace JspEdit
         {
             if ( sender is ImageDisplay )
             {
+                
                 ThumbnailList[SelectedImage].BackColor = Color.White;
                 SelectedImage = ThumbnailList.IndexOf( (ImageDisplay) sender );
                 ThumbnailList[SelectedImage].BackColor = Color.Yellow;
                 
-                label1.Text = string.Format( "Sprite {0} of {1}", SelectedImage+1, output.Images.Count.ToString() );
+                CountLabel.Text = string.Format( "Sprite {0} of {1}", SelectedImage+1, output.Images.Count.ToString() );
+                UpButton.Enabled = SelectedImage != 0;
 
                 WidthBox.Text = output.Images[SelectedImage].Width.ToString();
                 HeightBox.Text = output.Images[SelectedImage].Height.ToString();
@@ -254,6 +256,24 @@ namespace JspEdit
                 }
                 delThumbnail.Dispose();
             }
+        }
+
+        private void button1_Click( object sender, EventArgs e )
+        {
+            var im = output.Images[SelectedImage - 1];
+            output.Images.RemoveAt( SelectedImage - 1 );
+            output.Images.Insert( SelectedImage, im );
+            
+            var high = ThumbnailList[SelectedImage - 1];
+            var low = ThumbnailList[SelectedImage];
+            ThumbnailList.RemoveAt( SelectedImage - 1 );
+            ThumbnailList.Insert( SelectedImage, high );
+
+            var temp = high.Top;
+            high.Top = low.Top;
+            low.Top = temp;
+
+            ThumbnailClick( low, EventArgs.Empty );
         }
     }
 

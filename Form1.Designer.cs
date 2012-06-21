@@ -42,8 +42,8 @@
             this.exportFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.ConfigButton = new System.Windows.Forms.ToolStripSplitButton();
-            this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.CountLabel = new System.Windows.Forms.Label();
+            this.UpButton = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.DelButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -176,26 +176,27 @@
             this.ConfigButton.Text = "Configuration";
             this.ConfigButton.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             // 
-            // label1
+            // CountLabel
             // 
-            this.label1.Anchor = ( (System.Windows.Forms.AnchorStyles) ( ( System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left ) ) );
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font( "Verdana", 10F );
-            this.label1.Location = new System.Drawing.Point( 65, 542 );
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size( 98, 17 );
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Sprite X of Y";
+            this.CountLabel.Anchor = ( (System.Windows.Forms.AnchorStyles) ( ( System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left ) ) );
+            this.CountLabel.AutoSize = true;
+            this.CountLabel.Font = new System.Drawing.Font( "Verdana", 10F );
+            this.CountLabel.Location = new System.Drawing.Point( 65, 542 );
+            this.CountLabel.Name = "CountLabel";
+            this.CountLabel.Size = new System.Drawing.Size( 98, 17 );
+            this.CountLabel.TabIndex = 2;
+            this.CountLabel.Text = "Sprite X of Y";
             // 
-            // button1
+            // UpButton
             // 
-            this.button1.BackgroundImage = ( (System.Drawing.Image) ( resources.GetObject( "button1.BackgroundImage" ) ) );
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button1.Location = new System.Drawing.Point( 12, 36 );
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size( 32, 32 );
-            this.button1.TabIndex = 3;
-            this.button1.UseVisualStyleBackColor = true;
+            this.UpButton.BackgroundImage = ( (System.Drawing.Image) ( resources.GetObject( "UpButton.BackgroundImage" ) ) );
+            this.UpButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.UpButton.Location = new System.Drawing.Point( 12, 36 );
+            this.UpButton.Name = "UpButton";
+            this.UpButton.Size = new System.Drawing.Size( 32, 32 );
+            this.UpButton.TabIndex = 3;
+            this.UpButton.UseVisualStyleBackColor = true;
+            this.UpButton.Click += new System.EventHandler( this.button1_Click );
             // 
             // button2
             // 
@@ -347,8 +348,8 @@
             this.Controls.Add( this.label2 );
             this.Controls.Add( this.DelButton );
             this.Controls.Add( this.button2 );
-            this.Controls.Add( this.button1 );
-            this.Controls.Add( this.label1 );
+            this.Controls.Add( this.UpButton );
+            this.Controls.Add( this.CountLabel );
             this.Controls.Add( this.toolStrip1 );
             this.DoubleBuffered = true;
             this.Name = "MainForm";
@@ -375,8 +376,8 @@
         private System.Windows.Forms.ToolStripDropDownButton ExportButton;
         private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem exportFolderToolStripMenuItem;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label CountLabel;
+        private System.Windows.Forms.Button UpButton;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button DelButton;
         private System.Windows.Forms.Label label2;
