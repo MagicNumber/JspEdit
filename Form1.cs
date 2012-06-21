@@ -103,13 +103,19 @@ namespace JspEdit
             HeightBox.Text = output.Images[0].Width.ToString();
             WidthBox.Text = output.Images[0].Height.ToString();
 
+            GenerateThumbnails();
+
+            SelectedImage = 0;
+            ThumbnailClick( ThumbnailList[0], EventArgs.Empty ); // Load the first thumbnail automatically. 
+        }
+
+        void GenerateThumbnails()
+        {
+            ThumbnailList.ForEach( I => I.Dispose() );
+            ThumbnailList.Clear();
             panel1.Controls.Clear();
 
             int heightSoFar = 0;
-
-            ThumbnailList.ForEach( I => I.Dispose() );
-            ThumbnailList.Clear();
-            
             for ( int i = 0; i < output.Images.Count; i++ )
             {
                 ImageDisplay img = new ImageDisplay();
@@ -125,9 +131,9 @@ namespace JspEdit
                 img.Click += new EventHandler( ThumbnailClick );
             }
             panel1.Refresh();
-            SelectedImage = 0;
-            ThumbnailClick( ThumbnailList[0], EventArgs.Empty ); // Load the first thumbnail automatically. 
         }
+
+
 
         void ThumbnailClick( object sender, EventArgs e )
         {
@@ -223,25 +229,31 @@ namespace JspEdit
 
         private void SaveAsButton_Click( object sender, EventArgs e )
         {
-            bool done = false;
-
             var dialog = new SaveFileDialog();
             dialog.Filter = "JSP files (*.jsp)|*.jsp|All files (*.*)|*.*";
             DialogResult result = dialog.ShowDialog();
-            do
+            if ( result == DialogResult.OK )
             {
-                if ( result == DialogResult.OK )
-                {
-                    SaveFile( dialog.FileName );
-                }
-                else
-                {
-                    done = true;
-                }
+                SaveFile( dialog.FileName );
             }
-            while ( !done );
 
             this.Refresh();
+        }
+
+        private void DelButton_Click( object sender, EventArgs e )
+        {
+            if ( SelectedImage < ThumbnailList.Count && SelectedImage < output.Images.Count )
+            {
+                var delThumbnail = ThumbnailList[SelectedImage];
+                output.Images.RemoveAt( SelectedImage );
+                ThumbnailList.RemoveAt( SelectedImage );
+                foreach ( var t in ThumbnailList )
+                {
+                    if ( t.Top >= delThumbnail.Top )
+                        t.Top -= delThumbnail.Height + ThumbnailPadding;
+                }
+                delThumbnail.Dispose();
+            }
         }
     }
 

@@ -217,6 +217,7 @@
             this.DelButton.Size = new System.Drawing.Size( 32, 32 );
             this.DelButton.TabIndex = 5;
             this.DelButton.UseVisualStyleBackColor = true;
+            this.DelButton.Click += new System.EventHandler( this.DelButton_Click );
             // 
             // label2
             // 
@@ -349,6 +350,7 @@
             this.Controls.Add( this.button1 );
             this.Controls.Add( this.label1 );
             this.Controls.Add( this.toolStrip1 );
+            this.DoubleBuffered = true;
             this.Name = "MainForm";
             this.Text = "JSP Edit";
             this.toolStrip1.ResumeLayout( false );
