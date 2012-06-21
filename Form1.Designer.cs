@@ -106,6 +106,7 @@
             this.SaveAsButton.Name = "SaveAsButton";
             this.SaveAsButton.Size = new System.Drawing.Size( 28, 28 );
             this.SaveAsButton.Text = "SaveAs";
+            this.SaveAsButton.Click += new System.EventHandler( this.SaveAsButton_Click );
             // 
             // toolStripSeparator2
             // 

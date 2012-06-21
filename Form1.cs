@@ -35,7 +35,7 @@ namespace JspEdit
         private void OpenButton_Click( object sender, EventArgs e )
         {
             var dialog = new OpenFileDialog();
-            dialog.DefaultExt = "*.jsp";
+            dialog.Filter = "JSP files (*.jsp)|*.jsp|All files (*.*)|*.*";
             dialog.Multiselect = false;
             DialogResult result = dialog.ShowDialog();
             if ( result == System.Windows.Forms.DialogResult.OK )
@@ -184,9 +184,17 @@ namespace JspEdit
 
         private void SaveButton_Click( object sender, EventArgs e )
         {
+            SaveFile( FilePath );
+        }
+
+
+        private void SaveFile( string name )
+        {
+            if ( name == null ) return;
+
             try
             {
-                using ( FileStream fs = new FileStream( FilePath, FileMode.OpenOrCreate ) )
+                using ( FileStream fs = new FileStream( name, FileMode.OpenOrCreate ) )
                 using ( BinaryWriter bw = new BinaryWriter( fs ) )
                 {
                     JSPFactory.Save( output, bw );
@@ -211,6 +219,29 @@ namespace JspEdit
             finally
             {
             }
+        }
+
+        private void SaveAsButton_Click( object sender, EventArgs e )
+        {
+            bool done = false;
+
+            var dialog = new SaveFileDialog();
+            dialog.Filter = "JSP files (*.jsp)|*.jsp|All files (*.*)|*.*";
+            DialogResult result = dialog.ShowDialog();
+            do
+            {
+                if ( result == DialogResult.OK )
+                {
+                    SaveFile( dialog.FileName );
+                }
+                else
+                {
+                    done = true;
+                }
+            }
+            while ( !done );
+
+            this.Refresh();
         }
     }
 
