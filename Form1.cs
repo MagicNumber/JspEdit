@@ -186,12 +186,13 @@ namespace JspEdit
         {
             try
             {
-                using ( FileStream fs = new FileStream( FilePath, FileMode.Open ) )
+                using ( FileStream fs = new FileStream( FilePath, FileMode.OpenOrCreate ) )
                 using ( BinaryWriter bw = new BinaryWriter( fs ) )
                 {
                     JSPFactory.Save( output, bw );
                 }
             }
+#if !DEBUG
             catch ( IOException ex )
             {
                 try
@@ -203,6 +204,12 @@ namespace JspEdit
                 {
                     MessageBox.Show( "Save failed. We tried to write out the details, but that failed too." );
                 }
+
+            
+            }
+#endif
+            finally
+            {
             }
         }
     }

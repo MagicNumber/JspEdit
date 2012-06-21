@@ -349,7 +349,6 @@
             this.Controls.Add( this.label1 );
             this.Controls.Add( this.toolStrip1 );
             this.Name = "MainForm";
-            this.ShowInTaskbar = false;
             this.Text = "JSP Edit";
             this.toolStrip1.ResumeLayout( false );
             this.toolStrip1.PerformLayout();
