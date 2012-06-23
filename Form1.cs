@@ -340,6 +340,7 @@ namespace JspEdit
                 }
                 GenerateThumbnails();
             }
+            ThumbnailClick( ThumbnailList[ThumbnailList.Count - 1], EventArgs.Empty );
 
             this.Refresh();
         }

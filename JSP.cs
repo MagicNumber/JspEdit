@@ -13,6 +13,7 @@ namespace JspEdit
 
     public class JSPImage
     {
+        // Blacks replaced with (1,1,1), because true black is rendered as transparent. 
         #region Colors
         public static readonly Color[] colors = new Color[]{
                     Color.FromArgb(0,0,0),
@@ -47,7 +48,7 @@ namespace JspEdit
                     Color.FromArgb(236,236,236),
                     Color.FromArgb(244,244,244),
                     Color.FromArgb(252,252,252),
-                    Color.FromArgb(0,0,0),
+                    Color.FromArgb(1,1,1),
                     Color.FromArgb(0,17,0),
                     Color.FromArgb(0,34,0),
                     Color.FromArgb(0,50,0),
@@ -79,7 +80,7 @@ namespace JspEdit
                     Color.FromArgb(221,252,221),
                     Color.FromArgb(236,252,236),
                     Color.FromArgb(252,252,252),
-                    Color.FromArgb(0,0,0),
+                    Color.FromArgb(1,1,1),
                     Color.FromArgb(9,7,3),
                     Color.FromArgb(19,13,6),
                     Color.FromArgb(28,20,10),
@@ -111,7 +112,7 @@ namespace JspEdit
                     Color.FromArgb(238,233,227),
                     Color.FromArgb(245,243,239),
                     Color.FromArgb(252,252,252),
-                    Color.FromArgb(0,0,0),
+                    Color.FromArgb(1,1,1),
                     Color.FromArgb(0,0,17),
                     Color.FromArgb(0,0,34),
                     Color.FromArgb(0,0,51),
@@ -143,7 +144,7 @@ namespace JspEdit
                     Color.FromArgb(221,221,252),
                     Color.FromArgb(236,236,252),
                     Color.FromArgb(252,252,252),
-                    Color.FromArgb(0,0,0),
+                    Color.FromArgb(1,1,1),
                     Color.FromArgb(17,0,0),
                     Color.FromArgb(34,0,0),
                     Color.FromArgb(50,0,0),
@@ -175,7 +176,7 @@ namespace JspEdit
                     Color.FromArgb(252,221,221),
                     Color.FromArgb(252,236,236),
                     Color.FromArgb(252,252,252),
-                    Color.FromArgb(0,0,0),
+                    Color.FromArgb(1,1,1),
                     Color.FromArgb(17,17,0),
                     Color.FromArgb(34,34,0),
                     Color.FromArgb(51,51,0),
@@ -207,7 +208,7 @@ namespace JspEdit
                     Color.FromArgb(252,252,221),
                     Color.FromArgb(252,252,236),
                     Color.FromArgb(252,252,252),
-                    Color.FromArgb(0,0,0),
+                    Color.FromArgb(1,1,1),
                     Color.FromArgb(17,0,17),
                     Color.FromArgb(34,0,34),
                     Color.FromArgb(51,0,51),
@@ -239,7 +240,7 @@ namespace JspEdit
                     Color.FromArgb(252,221,252),
                     Color.FromArgb(252,236,252),
                     Color.FromArgb(252,252,252),
-                    Color.FromArgb(0,0,0),
+                    Color.FromArgb(1,1,1),
                     Color.FromArgb(0,17,17),
                     Color.FromArgb(0,34,34),
                     Color.FromArgb(0,51,51),
@@ -370,11 +371,15 @@ namespace JspEdit
 
         public static JSPImage FromBitmap( Bitmap image )
         {
-            BitmapData imgdata = image.LockBits( new Rectangle( 0, 0, image.Width, image.Height ), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb );
+            byte[] JSPbytes = new byte[image.Width * image.Height];
 
-            byte[] imagebytes = new byte[3 * image.Width * image.Height];
+            int bytesPerPixel = image.PixelFormat == PixelFormat.Format8bppIndexed ? 1 : 3;
+
+            BitmapData imgdata = image.LockBits( new Rectangle( 0, 0, image.Width, image.Height ), ImageLockMode.ReadOnly, image.PixelFormat );
+
+            byte[] imagebytes = new byte[bytesPerPixel * image.Width * image.Height];
             int numRows = image.Height;
-            int numBytesPerRow = image.Width * 3;
+            int numBytesPerRow = image.Width * bytesPerPixel;
 
             for ( int n = 0; n < image.Height; n++ )
             {
@@ -385,19 +390,26 @@ namespace JspEdit
                 length: numBytesPerRow
                 );
             }
-
-            byte[] JSPbytes = new byte[image.Width * image.Height];
-
-            for ( int i = 0; i < JSPbytes.Length; i++ )
+            if ( image.PixelFormat == PixelFormat.Format8bppIndexed )
             {
-                byte r, g, b;
-                b = imagebytes[3 * i];
-                g = imagebytes[3 * i + 1];
-                r = imagebytes[3 * i + 2];
+                JSPbytes = imagebytes;
+            }
+            else
+            {
+                for ( int i = 0; i < JSPbytes.Length; i++ )
+                {
+                    byte r, g, b;
+                    b = imagebytes[3 * i];
+                    g = imagebytes[3 * i + 1];
+                    r = imagebytes[3 * i + 2];
 
-                JSPbytes[i] = (byte) CalculateNearestColor( r, g, b );
+                    JSPbytes[i] = (byte) CalculateNearestColor( r, g, b );
+                }
             }
             image.UnlockBits( imgdata );
+
+
+
 
             JSPImage output = new JSPImage( (short) image.Width, (short) image.Height );
             output.SetData( JSPbytes );
