@@ -362,6 +362,11 @@ namespace JspEdit
             return B;
         }
 
+        public override string ToString()
+        {
+            return string.Format( "W={0},H={1},Ox={2},Oy={3}", Width, Height, OfsX, OfsY );
+        }
+
 
         public static JSPImage FromBitmap( Bitmap image )
         {

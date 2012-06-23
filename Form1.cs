@@ -170,7 +170,9 @@ namespace JspEdit
 
         private void panel1_MouseWheel( object sender, MouseEventArgs e )
         {
-            panel1.VerticalScroll.Value += ( e.Delta / 120 ) * SystemInformation.MouseWheelScrollLines;
+            var val = ( e.Delta / 120 ) * SystemInformation.MouseWheelScrollLines;
+            if ( val > 0 && val < panel1.VerticalScroll.Maximum )
+                panel1.VerticalScroll.Value += val;
         }
 
         private void ofXBox_TextChanged( object sender, EventArgs e )
@@ -312,6 +314,9 @@ namespace JspEdit
 
         private void ImportButton_Click( object sender, EventArgs e )
         {
+            if ( WorkingFile == null )
+                WorkingFile = new JSP();
+
             var dialog = new OpenFileDialog();
             dialog.Multiselect = true;
             DialogResult result = dialog.ShowDialog();
