@@ -365,31 +365,38 @@ namespace JspEdit
 
         public static JSPImage FromBitmap( Bitmap image )
         {
-            BitmapData data = image.LockBits( new Rectangle( 0, 0, image.Width, image.Height ), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb );
+            BitmapData imgdata = image.LockBits( new Rectangle( 0, 0, image.Width, image.Height ), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb );
 
-            byte[] imagebytes = new byte[data.Stride * data.Height];
-            Marshal.Copy(
-            source: data.Scan0,
-            destination: imagebytes,
-            startIndex: 0,
-            length: imagebytes.Length );
+            byte[] imagebytes = new byte[3 * image.Width * image.Height];
+            int numRows = image.Height;
+            int numBytesPerRow = image.Width * 3;
+
+            for ( int n = 0; n < image.Height; n++ )
+            {
+                Marshal.Copy(
+                source: new IntPtr( imgdata.Scan0.ToInt64() + n * imgdata.Stride ),
+                startIndex: n * numBytesPerRow,
+                destination: imagebytes,
+                length: numBytesPerRow
+                );
+            }
 
             byte[] JSPbytes = new byte[image.Width * image.Height];
 
             for ( int i = 0; i < JSPbytes.Length; i++ )
             {
-                byte r,g,b;
+                byte r, g, b;
                 b = imagebytes[3 * i];
                 g = imagebytes[3 * i + 1];
                 r = imagebytes[3 * i + 2];
 
                 JSPbytes[i] = (byte) CalculateNearestColor( r, g, b );
             }
-
+            image.UnlockBits( imgdata );
 
             JSPImage output = new JSPImage( (short) image.Width, (short) image.Height );
             output.SetData( JSPbytes );
-            output.SetOffSet( 0, 0 );            
+            output.SetOffSet( 0, 0 );
             return output;
         }
 
@@ -407,14 +414,14 @@ namespace JspEdit
                 );
 
 
-            double max = 0;
+            double min = 0;
             for ( int i = 0; i < distances.Length; i++ )
             {
-                if (distances[i] > max)
-                    max = distances[i];
+                if (distances[i] < min)
+                    min = distances[i];
             }
             
-            return Array.FindIndex(distances, f => f == max);
+            return Array.FindIndex(distances, f => f == min);
         }
 
 
