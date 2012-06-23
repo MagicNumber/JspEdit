@@ -372,7 +372,7 @@ namespace JspEdit
         public static JSPImage FromBitmap( Bitmap image )
         {
             byte[] JSPbytes = new byte[image.Width * image.Height];
-
+            
             int bytesPerPixel = image.PixelFormat == PixelFormat.Format8bppIndexed ? 1 : 3;
 
             BitmapData imgdata = image.LockBits( new Rectangle( 0, 0, image.Width, image.Height ), ImageLockMode.ReadOnly, image.PixelFormat );
@@ -384,12 +384,13 @@ namespace JspEdit
             for ( int n = 0; n < image.Height; n++ )
             {
                 Marshal.Copy(
-                source: new IntPtr( imgdata.Scan0.ToInt64() + n * imgdata.Stride ),
-                startIndex: n * numBytesPerRow,
+                source: new IntPtr( imgdata.Scan0.ToInt64() + n * imgdata.Stride ),                
                 destination: imagebytes,
+                startIndex: n * numBytesPerRow,
                 length: numBytesPerRow
                 );
             }
+            
             if ( image.PixelFormat == PixelFormat.Format8bppIndexed )
             {
                 JSPbytes = imagebytes;
@@ -407,9 +408,6 @@ namespace JspEdit
                 }
             }
             image.UnlockBits( imgdata );
-
-
-
 
             JSPImage output = new JSPImage( (short) image.Width, (short) image.Height );
             output.SetData( JSPbytes );
