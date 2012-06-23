@@ -19,7 +19,18 @@ namespace JspEdit
 
         List<ImageDisplay> ThumbnailList = new List<ImageDisplay>();
 
-        string FilePath;
+        string _FilePath;
+        string FilePath
+        {
+            get
+            {
+                return _FilePath;
+            }
+            set
+            {
+                _FilePath = value; this.Text = string.Format( "{0} - JSP Edit", value );
+            }
+        }
         string ErrorFilename = string.Format( "error_{0}{1}{2}.txt", DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day );
 
         public MainForm()
@@ -238,6 +249,7 @@ namespace JspEdit
             if ( result == DialogResult.OK )
             {
                 SaveFile( dialog.FileName );
+                FilePath = dialog.FileName;
             }
 
             this.Refresh();
@@ -259,7 +271,7 @@ namespace JspEdit
             }
         }
 
-        private void button1_Click( object sender, EventArgs e )
+        private void UpButton_Click( object sender, EventArgs e )
         {
             var im = output.Images[SelectedImage - 1];
             output.Images.RemoveAt( SelectedImage - 1 );
@@ -273,12 +285,13 @@ namespace JspEdit
             var temp = high.Top;
             high.Top = low.Top;
             low.Top = temp;
+            
+            panel1.ScrollControlIntoView( low );
 
             ThumbnailClick( low, EventArgs.Empty );
-            panel1.ScrollControlIntoView( low );
         }
 
-        private void button2_Click( object sender, EventArgs e )
+        private void DownButton_Click( object sender, EventArgs e )
         {
             var im = output.Images[SelectedImage];
             output.Images.RemoveAt( SelectedImage );
@@ -292,9 +305,39 @@ namespace JspEdit
             var temp = high.Top;
             high.Top = low.Top;
             low.Top = temp;
+            panel1.ScrollControlIntoView( high );
 
             ThumbnailClick( high, EventArgs.Empty );
-            panel1.ScrollControlIntoView( high );
+        }
+
+
+        private void ImportButton_Click( object sender, EventArgs e )
+        {
+            var dialog = new OpenFileDialog();
+            dialog.Multiselect = true;
+            DialogResult result = dialog.ShowDialog();
+            if ( result == System.Windows.Forms.DialogResult.OK )
+            {
+                foreach ( string filename in dialog.FileNames )
+                {
+                    try
+                    {
+                        using ( Bitmap b = (Bitmap) Bitmap.FromFile( filename ) )
+                        {
+                            var JSP = JSPImage.FromBitmap( b );
+                            output.Images.Add( JSP );
+                        }
+                    }
+                    catch ( IOException ex )
+                    {
+                        WriteExceptionToFile( ex );
+                        MessageBox.Show( "Import of " + filename + " failed. We've wrote out the details to " + ErrorFilename );
+                    }
+                }
+                GenerateThumbnails();
+            }
+
+            this.Refresh();
         }
     }
 

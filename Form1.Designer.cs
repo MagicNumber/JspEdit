@@ -74,7 +74,7 @@
             this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStrip1.Location = new System.Drawing.Point( 0, 0 );
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size( 794, 31 );
+            this.toolStrip1.Size = new System.Drawing.Size( 792, 31 );
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -124,17 +124,18 @@
             this.ImportButton.Name = "ImportButton";
             this.ImportButton.Size = new System.Drawing.Size( 37, 28 );
             this.ImportButton.Text = "Import";
+            this.ImportButton.Click += new System.EventHandler( this.ImportButton_Click );
             // 
             // exportToolStripMenuItem
             // 
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size( 150, 22 );
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size( 152, 22 );
             this.exportToolStripMenuItem.Text = "Import Sprite";
             // 
             // importFolderToolStripMenuItem
             // 
             this.importFolderToolStripMenuItem.Name = "importFolderToolStripMenuItem";
-            this.importFolderToolStripMenuItem.Size = new System.Drawing.Size( 150, 22 );
+            this.importFolderToolStripMenuItem.Size = new System.Drawing.Size( 152, 22 );
             this.importFolderToolStripMenuItem.Text = "Import Folder";
             // 
             // ExportButton
@@ -181,7 +182,7 @@
             this.CountLabel.Anchor = ( (System.Windows.Forms.AnchorStyles) ( ( System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left ) ) );
             this.CountLabel.AutoSize = true;
             this.CountLabel.Font = new System.Drawing.Font( "Verdana", 10F );
-            this.CountLabel.Location = new System.Drawing.Point( 65, 542 );
+            this.CountLabel.Location = new System.Drawing.Point( 78, 540 );
             this.CountLabel.Name = "CountLabel";
             this.CountLabel.Size = new System.Drawing.Size( 98, 17 );
             this.CountLabel.TabIndex = 2;
@@ -196,7 +197,7 @@
             this.UpButton.Size = new System.Drawing.Size( 32, 32 );
             this.UpButton.TabIndex = 3;
             this.UpButton.UseVisualStyleBackColor = true;
-            this.UpButton.Click += new System.EventHandler( this.button1_Click );
+            this.UpButton.Click += new System.EventHandler( this.UpButton_Click );
             // 
             // DownButton
             // 
@@ -207,14 +208,14 @@
             this.DownButton.Size = new System.Drawing.Size( 32, 32 );
             this.DownButton.TabIndex = 4;
             this.DownButton.UseVisualStyleBackColor = true;
-            this.DownButton.Click += new System.EventHandler( this.button2_Click );
+            this.DownButton.Click += new System.EventHandler( this.DownButton_Click );
             // 
             // DelButton
             // 
             this.DelButton.Anchor = ( (System.Windows.Forms.AnchorStyles) ( ( System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left ) ) );
             this.DelButton.BackgroundImage = ( (System.Drawing.Image) ( resources.GetObject( "DelButton.BackgroundImage" ) ) );
             this.DelButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.DelButton.Location = new System.Drawing.Point( 12, 507 );
+            this.DelButton.Location = new System.Drawing.Point( 12, 505 );
             this.DelButton.Name = "DelButton";
             this.DelButton.Size = new System.Drawing.Size( 32, 32 );
             this.DelButton.TabIndex = 5;
@@ -226,7 +227,7 @@
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font( "Verdana", 10F );
-            this.label2.Location = new System.Drawing.Point( 210, 48 );
+            this.label2.Location = new System.Drawing.Point( 209, 48 );
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size( 53, 17 );
             this.label2.TabIndex = 6;
@@ -237,7 +238,7 @@
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font( "Verdana", 10F );
-            this.label3.Location = new System.Drawing.Point( 210, 78 );
+            this.label3.Location = new System.Drawing.Point( 209, 78 );
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size( 50, 17 );
             this.label3.TabIndex = 7;
@@ -247,7 +248,7 @@
             // 
             this.HeightBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.HeightBox.BackColor = System.Drawing.Color.White;
-            this.HeightBox.Location = new System.Drawing.Point( 330, 48 );
+            this.HeightBox.Location = new System.Drawing.Point( 329, 48 );
             this.HeightBox.Name = "HeightBox";
             this.HeightBox.ReadOnly = true;
             this.HeightBox.Size = new System.Drawing.Size( 100, 20 );
@@ -257,7 +258,7 @@
             // 
             this.WidthBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.WidthBox.BackColor = System.Drawing.Color.White;
-            this.WidthBox.Location = new System.Drawing.Point( 330, 79 );
+            this.WidthBox.Location = new System.Drawing.Point( 329, 79 );
             this.WidthBox.Name = "WidthBox";
             this.WidthBox.ReadOnly = true;
             this.WidthBox.Size = new System.Drawing.Size( 100, 20 );
@@ -267,7 +268,7 @@
             // 
             this.ofYBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.ofYBox.BackColor = System.Drawing.Color.White;
-            this.ofYBox.Location = new System.Drawing.Point( 556, 79 );
+            this.ofYBox.Location = new System.Drawing.Point( 555, 79 );
             this.ofYBox.Name = "ofYBox";
             this.ofYBox.Size = new System.Drawing.Size( 100, 20 );
             this.ofYBox.TabIndex = 13;
@@ -277,7 +278,7 @@
             // 
             this.ofXBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.ofXBox.BackColor = System.Drawing.Color.White;
-            this.ofXBox.Location = new System.Drawing.Point( 556, 48 );
+            this.ofXBox.Location = new System.Drawing.Point( 555, 48 );
             this.ofXBox.Name = "ofXBox";
             this.ofXBox.Size = new System.Drawing.Size( 100, 20 );
             this.ofXBox.TabIndex = 12;
@@ -288,7 +289,7 @@
             this.label4.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font( "Verdana", 10F );
-            this.label4.Location = new System.Drawing.Point( 436, 78 );
+            this.label4.Location = new System.Drawing.Point( 435, 78 );
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size( 63, 17 );
             this.label4.TabIndex = 11;
@@ -299,7 +300,7 @@
             this.label5.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font( "Verdana", 10F );
-            this.label5.Location = new System.Drawing.Point( 436, 48 );
+            this.label5.Location = new System.Drawing.Point( 435, 48 );
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size( 64, 17 );
             this.label5.TabIndex = 10;
@@ -313,7 +314,7 @@
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.Location = new System.Drawing.Point( 51, 36 );
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size( 153, 503 );
+            this.panel1.Size = new System.Drawing.Size( 153, 501 );
             this.panel1.TabIndex = 15;
             this.panel1.MouseWheel += new System.Windows.Forms.MouseEventHandler( this.panel1_MouseWheel );
             // 
@@ -329,14 +330,14 @@
             this.mainDisplayArea.Image = null;
             this.mainDisplayArea.Location = new System.Drawing.Point( 210, 105 );
             this.mainDisplayArea.Name = "mainDisplayArea";
-            this.mainDisplayArea.Size = new System.Drawing.Size( 572, 434 );
+            this.mainDisplayArea.Size = new System.Drawing.Size( 570, 432 );
             this.mainDisplayArea.TabIndex = 16;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF( 6F, 13F );
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size( 794, 568 );
+            this.ClientSize = new System.Drawing.Size( 792, 566 );
             this.Controls.Add( this.mainDisplayArea );
             this.Controls.Add( this.panel1 );
             this.Controls.Add( this.ofYBox );
