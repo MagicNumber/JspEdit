@@ -124,13 +124,13 @@
             this.ImportButton.Name = "ImportButton";
             this.ImportButton.Size = new System.Drawing.Size( 37, 28 );
             this.ImportButton.Text = "Import";
-            this.ImportButton.Click += new System.EventHandler( this.ImportButton_Click );
             // 
             // exportToolStripMenuItem
             // 
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
             this.exportToolStripMenuItem.Size = new System.Drawing.Size( 152, 22 );
             this.exportToolStripMenuItem.Text = "Import Sprite";
+            this.exportToolStripMenuItem.Click += new System.EventHandler( this.ImportButton_Click );
             // 
             // importFolderToolStripMenuItem
             // 

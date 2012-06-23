@@ -8,10 +8,8 @@ namespace JspEdit
 {
     public partial class MainForm : Form
     {
-        readonly Size ThumbnailSize = new Size( 1000, 48 );
-        readonly Size OriginalFormSize;
         readonly int ThumbnailPadding = 10; // Padding between items in the list of thumbnails.
-
+        readonly string ErrorFilename = string.Format( "error_{0}{1}{2}.txt", DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day );
         /// <summary>
         /// The number of the image we're looking at ATM. 
         /// </summary>
@@ -31,16 +29,17 @@ namespace JspEdit
                 _FilePath = value; this.Text = string.Format( "{0} - JSP Edit", value );
             }
         }
-        string ErrorFilename = string.Format( "error_{0}{1}{2}.txt", DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day );
+
+        JSP WorkingFile;
 
         public MainForm()
         {
             InitializeComponent();
             this.DoubleBuffered = true;
-            this.MinimumSize = OriginalFormSize = new Size( this.Size.Width, this.Size.Height );
+            this.MinimumSize = new Size( this.Size.Width, this.Size.Height );
         }
 
-        JSP output;
+        
 
 
         private void OpenButton_Click( object sender, EventArgs e )
@@ -81,7 +80,7 @@ namespace JspEdit
                 using ( FileStream fs = new FileStream( name, FileMode.Open ) )
                 using ( BinaryReader br = new BinaryReader( fs ) )
                 {
-                    output = JSPFactory.Load( br );
+                    WorkingFile = JSPFactory.Load( br );
                 }
             }
 #if !DEBUG
@@ -111,8 +110,8 @@ namespace JspEdit
             {
             }
 
-            HeightBox.Text = output.Images[0].Width.ToString();
-            WidthBox.Text = output.Images[0].Height.ToString();
+            HeightBox.Text = WorkingFile.Images[0].Width.ToString();
+            WidthBox.Text = WorkingFile.Images[0].Height.ToString();
 
             GenerateThumbnails();
 
@@ -127,10 +126,10 @@ namespace JspEdit
             panel1.Controls.Clear();
 
             int heightSoFar = 0;
-            for ( int i = 0; i < output.Images.Count; i++ )
+            for ( int i = 0; i < WorkingFile.Images.Count; i++ )
             {
                 ImageDisplay img = new ImageDisplay();
-                img.Image = output.Images[i];
+                img.Image = WorkingFile.Images[i];
                 img.Centered = false;
                 img.DrawOrigin = false;
                 img.Width = panel1.ClientSize.Width;
@@ -155,16 +154,16 @@ namespace JspEdit
                 SelectedImage = ThumbnailList.IndexOf( (ImageDisplay) sender );
                 ThumbnailList[SelectedImage].BackColor = Color.Yellow;
                 
-                CountLabel.Text = string.Format( "Sprite {0} of {1}", SelectedImage+1, output.Images.Count.ToString() );
+                CountLabel.Text = string.Format( "Sprite {0} of {1}", SelectedImage+1, WorkingFile.Images.Count.ToString() );
                 UpButton.Enabled = SelectedImage != 0;
-                DownButton.Enabled = SelectedImage != (output.Images.Count-1);
+                DownButton.Enabled = SelectedImage != (WorkingFile.Images.Count-1);
 
-                WidthBox.Text = output.Images[SelectedImage].Width.ToString();
-                HeightBox.Text = output.Images[SelectedImage].Height.ToString();
-                ofXBox.Text = output.Images[SelectedImage].OfsX.ToString();
-                ofYBox.Text = output.Images[SelectedImage].OfsY.ToString();
+                WidthBox.Text = WorkingFile.Images[SelectedImage].Width.ToString();
+                HeightBox.Text = WorkingFile.Images[SelectedImage].Height.ToString();
+                ofXBox.Text = WorkingFile.Images[SelectedImage].OfsX.ToString();
+                ofYBox.Text = WorkingFile.Images[SelectedImage].OfsY.ToString();
 
-                mainDisplayArea.Image = output.Images[SelectedImage];
+                mainDisplayArea.Image = WorkingFile.Images[SelectedImage];
                 this.Refresh();
             }
         }
@@ -192,7 +191,7 @@ namespace JspEdit
             if ( !string.IsNullOrEmpty( ofXBox.Text ) && !string.IsNullOrEmpty( ofYBox.Text ) 
                 &&  short.TryParse( ofXBox.Text, out offX ) && short.TryParse( ofYBox.Text, out offY ) )
             {
-                output.Images[SelectedImage].SetOffSet( offX, offY );
+                WorkingFile.Images[SelectedImage].SetOffSet( offX, offY );
             }
             else
             {
@@ -217,7 +216,7 @@ namespace JspEdit
                 using ( FileStream fs = new FileStream( name, FileMode.OpenOrCreate ) )
                 using ( BinaryWriter bw = new BinaryWriter( fs ) )
                 {
-                    JSPFactory.Save( output, bw );
+                    JSPFactory.Save( WorkingFile, bw );
                 }
             }
 #if !DEBUG
@@ -257,10 +256,10 @@ namespace JspEdit
 
         private void DelButton_Click( object sender, EventArgs e )
         {
-            if ( SelectedImage < ThumbnailList.Count && SelectedImage < output.Images.Count )
+            if ( SelectedImage < ThumbnailList.Count && SelectedImage < WorkingFile.Images.Count )
             {
                 var delThumbnail = ThumbnailList[SelectedImage];
-                output.Images.RemoveAt( SelectedImage );
+                WorkingFile.Images.RemoveAt( SelectedImage );
                 ThumbnailList.RemoveAt( SelectedImage );
                 foreach ( var t in ThumbnailList )
                 {
@@ -273,9 +272,9 @@ namespace JspEdit
 
         private void UpButton_Click( object sender, EventArgs e )
         {
-            var im = output.Images[SelectedImage - 1];
-            output.Images.RemoveAt( SelectedImage - 1 );
-            output.Images.Insert( SelectedImage, im );
+            var im = WorkingFile.Images[SelectedImage - 1];
+            WorkingFile.Images.RemoveAt( SelectedImage - 1 );
+            WorkingFile.Images.Insert( SelectedImage, im );
             
             var high = ThumbnailList[SelectedImage - 1];
             var low = ThumbnailList[SelectedImage];
@@ -293,9 +292,9 @@ namespace JspEdit
 
         private void DownButton_Click( object sender, EventArgs e )
         {
-            var im = output.Images[SelectedImage];
-            output.Images.RemoveAt( SelectedImage );
-            output.Images.Insert( SelectedImage+1, im );
+            var im = WorkingFile.Images[SelectedImage];
+            WorkingFile.Images.RemoveAt( SelectedImage );
+            WorkingFile.Images.Insert( SelectedImage+1, im );
 
             var high = ThumbnailList[SelectedImage];
             var low = ThumbnailList[SelectedImage+1];
@@ -325,7 +324,7 @@ namespace JspEdit
                         using ( Bitmap b = (Bitmap) Bitmap.FromFile( filename ) )
                         {
                             var JSP = JSPImage.FromBitmap( b );
-                            output.Images.Add( JSP );
+                            WorkingFile.Images.Add( JSP );
                         }
                     }
                     catch ( IOException ex )
