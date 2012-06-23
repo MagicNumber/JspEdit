@@ -362,6 +362,62 @@ namespace JspEdit
             return B;
         }
 
+
+        public static JSPImage FromBitmap( Bitmap image )
+        {
+            BitmapData data = image.LockBits( new Rectangle( 0, 0, image.Width, image.Height ), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb );
+
+            byte[] imagebytes = new byte[data.Stride * data.Height];
+            Marshal.Copy(
+            source: data.Scan0,
+            destination: imagebytes,
+            startIndex: 0,
+            length: imagebytes.Length );
+
+            byte[] JSPbytes = new byte[image.Width * image.Height];
+
+            for ( int i = 0; i < JSPbytes.Length; i++ )
+            {
+                byte r,g,b;
+                b = imagebytes[3 * i];
+                g = imagebytes[3 * i + 1];
+                r = imagebytes[3 * i + 2];
+
+                JSPbytes[i] = (byte) CalculateNearestColor( r, g, b );
+            }
+
+
+            JSPImage output = new JSPImage( (short) image.Width, (short) image.Height );
+            output.SetData( JSPbytes );
+            output.SetOffSet( 0, 0 );            
+            return output;
+        }
+
+        /// <summary>
+        /// Calculates the closest match to an arbitarary 24-bit color. Returns the index in the palette.
+        /// </summary>
+        /// <param name="r"></param>
+        /// <param name="g"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        private static int CalculateNearestColor( int r, int g, int b )
+        {
+            double[] distances = Array.ConvertAll( colors,
+                C => Math.Pow( C.B - b, 2 ) + Math.Pow( C.G - g, 2 ) + Math.Pow( C.R - r, 2 )
+                );
+
+
+            double max = 0;
+            for ( int i = 0; i < distances.Length; i++ )
+            {
+                if (distances[i] > max)
+                    max = distances[i];
+            }
+            
+            return Array.FindIndex(distances, f => f == max);
+        }
+
+
     }
 
 }
