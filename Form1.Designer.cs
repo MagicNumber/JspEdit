@@ -44,7 +44,7 @@
             this.ConfigButton = new System.Windows.Forms.ToolStripSplitButton();
             this.CountLabel = new System.Windows.Forms.Label();
             this.UpButton = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.DownButton = new System.Windows.Forms.Button();
             this.DelButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -198,15 +198,16 @@
             this.UpButton.UseVisualStyleBackColor = true;
             this.UpButton.Click += new System.EventHandler( this.button1_Click );
             // 
-            // button2
+            // DownButton
             // 
-            this.button2.BackgroundImage = ( (System.Drawing.Image) ( resources.GetObject( "button2.BackgroundImage" ) ) );
-            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button2.Location = new System.Drawing.Point( 12, 74 );
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size( 32, 32 );
-            this.button2.TabIndex = 4;
-            this.button2.UseVisualStyleBackColor = true;
+            this.DownButton.BackgroundImage = ( (System.Drawing.Image) ( resources.GetObject( "DownButton.BackgroundImage" ) ) );
+            this.DownButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.DownButton.Location = new System.Drawing.Point( 12, 74 );
+            this.DownButton.Name = "DownButton";
+            this.DownButton.Size = new System.Drawing.Size( 32, 32 );
+            this.DownButton.TabIndex = 4;
+            this.DownButton.UseVisualStyleBackColor = true;
+            this.DownButton.Click += new System.EventHandler( this.button2_Click );
             // 
             // DelButton
             // 
@@ -347,7 +348,7 @@
             this.Controls.Add( this.label3 );
             this.Controls.Add( this.label2 );
             this.Controls.Add( this.DelButton );
-            this.Controls.Add( this.button2 );
+            this.Controls.Add( this.DownButton );
             this.Controls.Add( this.UpButton );
             this.Controls.Add( this.CountLabel );
             this.Controls.Add( this.toolStrip1 );
@@ -378,7 +379,7 @@
         private System.Windows.Forms.ToolStripMenuItem exportFolderToolStripMenuItem;
         private System.Windows.Forms.Label CountLabel;
         private System.Windows.Forms.Button UpButton;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button DownButton;
         private System.Windows.Forms.Button DelButton;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;

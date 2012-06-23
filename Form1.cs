@@ -146,6 +146,7 @@ namespace JspEdit
                 
                 CountLabel.Text = string.Format( "Sprite {0} of {1}", SelectedImage+1, output.Images.Count.ToString() );
                 UpButton.Enabled = SelectedImage != 0;
+                DownButton.Enabled = SelectedImage != (output.Images.Count-1);
 
                 WidthBox.Text = output.Images[SelectedImage].Width.ToString();
                 HeightBox.Text = output.Images[SelectedImage].Height.ToString();
@@ -274,6 +275,26 @@ namespace JspEdit
             low.Top = temp;
 
             ThumbnailClick( low, EventArgs.Empty );
+            panel1.ScrollControlIntoView( low );
+        }
+
+        private void button2_Click( object sender, EventArgs e )
+        {
+            var im = output.Images[SelectedImage];
+            output.Images.RemoveAt( SelectedImage );
+            output.Images.Insert( SelectedImage+1, im );
+
+            var high = ThumbnailList[SelectedImage];
+            var low = ThumbnailList[SelectedImage+1];
+            ThumbnailList.RemoveAt( SelectedImage );
+            ThumbnailList.Insert( SelectedImage+1, high );
+
+            var temp = high.Top;
+            high.Top = low.Top;
+            low.Top = temp;
+
+            ThumbnailClick( high, EventArgs.Empty );
+            panel1.ScrollControlIntoView( high );
         }
     }
 
