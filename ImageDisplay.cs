@@ -73,27 +73,26 @@ namespace JspEdit
                     newHeight = Image.Height;
                 }
 
-               
+
+
                 if ( Centered )
                 {
                     e.Graphics.TranslateTransform( this.Width / 2, this.Height / 2 );
+                    e.Graphics.TranslateTransform( -Render.Width / 2, -Render.Height / 2 );
                 }
+
+                e.Graphics.DrawImage( this.Render, 0, 0, newWidth, newHeight );
 
                 if ( DrawOrigin )
                 {
+                    e.Graphics.TranslateTransform( Render.Width / 2, Render.Height / 2 );
+                    e.Graphics.TranslateTransform( Image.OfsX, Image.OfsY );
                     e.Graphics.DrawLine( Pens.Black, -5, 0, +5, 0 );
                     e.Graphics.DrawLine( Pens.Black, 0, -5, 0, +5 );
+                    e.Graphics.TranslateTransform( -Image.OfsX, -Image.OfsY );
                 }
 
-                int offsetX = 0;
-                int offsetY = 0;
-                if ( Centered )
-                {
-                    offsetX += Image.OfsX;
-                    offsetY += Image.OfsY;
-                }
-                
-                e.Graphics.DrawImage( this.Render, offsetX, offsetY, newWidth, newHeight );
+                e.Graphics.ResetTransform();
             }
         }
     }
