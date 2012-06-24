@@ -374,8 +374,13 @@ namespace JspEdit
             byte[] JSPbytes = new byte[image.Width * image.Height];
             
             int bytesPerPixel = image.PixelFormat == PixelFormat.Format8bppIndexed ? 1 : 3;
+            PixelFormat loadformat;
+            if ( image.PixelFormat == PixelFormat.Format8bppIndexed )
+                loadformat = PixelFormat.Format8bppIndexed;
+            else
+                loadformat = PixelFormat.Format24bppRgb;
 
-            BitmapData imgdata = image.LockBits( new Rectangle( 0, 0, image.Width, image.Height ), ImageLockMode.ReadOnly, image.PixelFormat );
+            BitmapData imgdata = image.LockBits( new Rectangle( 0, 0, image.Width, image.Height ), ImageLockMode.ReadOnly, loadformat );
 
             byte[] imagebytes = new byte[bytesPerPixel * image.Width * image.Height];
             int numRows = image.Height;
