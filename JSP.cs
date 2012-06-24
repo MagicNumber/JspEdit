@@ -416,10 +416,7 @@ namespace JspEdit
         }
 
 
-        //static Dictionary<Color, Dictionary<int, double>> cache = new Dictionary<Color, Dictionary<int, double>>();
-      //  static Dictionary<int, int[]> cache = new Dictionary<int, int[]>();
         static Dictionary<int, int> cache = new Dictionary<int, int>();
-
         /// <summary>
         /// Calculates the closest match to an arbitarary 24-bit color. Returns the index in the palette.
         /// </summary>
