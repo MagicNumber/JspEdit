@@ -320,7 +320,7 @@ namespace JspEdit
             ThumbnailClick( high, EventArgs.Empty );
         }
 
-        private void ImportSprites( string[] files )
+        private void ImportSprites( string[] files, bool weCareAboutExceptions )
         {
             foreach ( string filename in files )
             {
@@ -340,8 +340,11 @@ namespace JspEdit
                 }
                 catch ( Exception ex )
                 {
-                    WriteExceptionToFile( ex );
-                    MessageBox.Show( "Import of " + filename + " failed. We've wrote out the details to " + ErrorFilename );
+                    if ( weCareAboutExceptions )
+                    {
+                        WriteExceptionToFile( ex );
+                        MessageBox.Show( "Import of " + filename + " failed. We've wrote out the details to " + ErrorFilename );
+                    }
                 }
             }
             GenerateThumbnails();
@@ -359,7 +362,7 @@ namespace JspEdit
             DialogResult result = dialog.ShowDialog();
             if ( result == System.Windows.Forms.DialogResult.OK )
             {
-                ImportSprites( dialog.FileNames );
+                ImportSprites( dialog.FileNames, true );
             }
             ThumbnailClick( ThumbnailList[ThumbnailList.Count - 1], EventArgs.Empty );
 
@@ -376,7 +379,7 @@ namespace JspEdit
             DialogResult result = dialog.ShowDialog();
             if ( result == System.Windows.Forms.DialogResult.OK )
             {
-                ImportSprites( Directory.GetFiles( dialog.SelectedPath ) );
+                ImportSprites( Directory.GetFiles( dialog.SelectedPath ), false );
             }
             ThumbnailClick( ThumbnailList[ThumbnailList.Count - 1], EventArgs.Empty );
 
