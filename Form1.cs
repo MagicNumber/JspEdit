@@ -188,6 +188,14 @@ namespace JspEdit
             }
             tbox.Text = tbox.Text.Substring( 0, firstNonNumber );
 
+            short test = 0;
+
+            if ( !short.TryParse( tbox.Text, out test ) )
+            {
+                return;
+            }
+
+
             short offX, offY;
 
             if ( !string.IsNullOrEmpty( ofXBox.Text ) && !string.IsNullOrEmpty( ofYBox.Text ) 
