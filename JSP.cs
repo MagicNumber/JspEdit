@@ -415,6 +415,11 @@ namespace JspEdit
             return output;
         }
 
+
+        //static Dictionary<Color, Dictionary<int, double>> cache = new Dictionary<Color, Dictionary<int, double>>();
+      //  static Dictionary<int, int[]> cache = new Dictionary<int, int[]>();
+        static Dictionary<int, int> cache = new Dictionary<int, int>();
+
         /// <summary>
         /// Calculates the closest match to an arbitarary 24-bit color. Returns the index in the palette.
         /// </summary>
@@ -424,19 +429,28 @@ namespace JspEdit
         /// <returns></returns>
         private static int CalculateNearestColor( int r, int g, int b )
         {
-            double[] distances = Array.ConvertAll( colors,
-                C => Math.Pow( C.B - b, 2 ) + Math.Pow( C.G - g, 2 ) + Math.Pow( C.R - r, 2 )
-                );
-
-
-            double min = 0;
-            for ( int i = 0; i < distances.Length; i++ )
+            int bigint = r * 1000000 + g * 1000 + b;
+            if ( !cache.ContainsKey( bigint ) )
             {
-                if (distances[i] < min)
-                    min = distances[i];
+
+                int[] distances = Array.ConvertAll( colors,
+                      ( Color C ) =>
+                      {
+                          return ( C.B - b ) * ( C.B - b ) + ( C.G - g ) * ( C.G - g ) + ( C.R - r ) * ( C.R - r );
+                      }
+                      );
+
+
+                double min = 0;
+                for ( int i = 0; i < distances.Length; i++ )
+                {
+                    if ( distances[i] < min )
+                        min = distances[i];
+                }
+
+                cache[bigint] = Array.FindIndex( distances, f => f == min );
             }
-            
-            return Array.FindIndex(distances, f => f == min);
+            return cache[bigint];
         }
 
 
