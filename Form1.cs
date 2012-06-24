@@ -332,7 +332,7 @@ namespace JspEdit
                             WorkingFile.Images.Add( JSP );
                         }
                     }
-                    catch ( IOException ex )
+                    catch ( Exception ex )
                     {
                         WriteExceptionToFile( ex );
                         MessageBox.Show( "Import of " + filename + " failed. We've wrote out the details to " + ErrorFilename );
