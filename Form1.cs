@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace JspEdit
 {
@@ -327,8 +328,14 @@ namespace JspEdit
                 {
                     using ( Bitmap b = (Bitmap) Bitmap.FromFile( filename ) )
                     {
+#if DEBUG
+                        Stopwatch S = Stopwatch.StartNew();
+#endif
                         var JSP = JSPImage.FromBitmap( b );
                         WorkingFile.Images.Add( JSP );
+#if DEBUG
+                        Debug.WriteLine( string.Format( "Parsing {0} ({2}x{3}) took {1}s", filename, S.Elapsed.TotalSeconds, JSP.Width, JSP.Height ) );
+#endif
                     }
                 }
                 catch ( Exception ex )
