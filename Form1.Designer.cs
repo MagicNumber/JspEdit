@@ -36,7 +36,7 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.ImportButton = new System.Windows.Forms.ToolStripDropDownButton();
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.importFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ImportFolder = new System.Windows.Forms.ToolStripMenuItem();
             this.ExportButton = new System.Windows.Forms.ToolStripDropDownButton();
             this.exportToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.exportFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -118,7 +118,7 @@
             this.ImportButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.ImportButton.DropDownItems.AddRange( new System.Windows.Forms.ToolStripItem[] {
             this.exportToolStripMenuItem,
-            this.importFolderToolStripMenuItem} );
+            this.ImportFolder} );
             this.ImportButton.Image = ( (System.Drawing.Image) ( resources.GetObject( "ImportButton.Image" ) ) );
             this.ImportButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ImportButton.Name = "ImportButton";
@@ -132,11 +132,12 @@
             this.exportToolStripMenuItem.Text = "Import Sprite";
             this.exportToolStripMenuItem.Click += new System.EventHandler( this.ImportButton_Click );
             // 
-            // importFolderToolStripMenuItem
+            // ImportFolder
             // 
-            this.importFolderToolStripMenuItem.Name = "importFolderToolStripMenuItem";
-            this.importFolderToolStripMenuItem.Size = new System.Drawing.Size( 152, 22 );
-            this.importFolderToolStripMenuItem.Text = "Import Folder";
+            this.ImportFolder.Name = "ImportFolder";
+            this.ImportFolder.Size = new System.Drawing.Size( 152, 22 );
+            this.ImportFolder.Text = "Import Folder";
+            this.ImportFolder.Click += new System.EventHandler( this.importFolder_Click );
             // 
             // ExportButton
             // 
@@ -374,7 +375,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripDropDownButton ImportButton;
         private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem importFolderToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ImportFolder;
         private System.Windows.Forms.ToolStripDropDownButton ExportButton;
         private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem exportFolderToolStripMenuItem;

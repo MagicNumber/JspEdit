@@ -319,6 +319,28 @@ namespace JspEdit
             ThumbnailClick( high, EventArgs.Empty );
         }
 
+        private void ImportSprites( string[] files )
+        {
+            foreach ( string filename in files )
+            {
+                try
+                {
+                    using ( Bitmap b = (Bitmap) Bitmap.FromFile( filename ) )
+                    {
+                        var JSP = JSPImage.FromBitmap( b );
+                        WorkingFile.Images.Add( JSP );
+                    }
+                }
+                catch ( Exception ex )
+                {
+                    WriteExceptionToFile( ex );
+                    MessageBox.Show( "Import of " + filename + " failed. We've wrote out the details to " + ErrorFilename );
+                }
+            }
+            GenerateThumbnails();
+        }
+
+
 
         private void ImportButton_Click( object sender, EventArgs e )
         {
@@ -330,23 +352,24 @@ namespace JspEdit
             DialogResult result = dialog.ShowDialog();
             if ( result == System.Windows.Forms.DialogResult.OK )
             {
-                foreach ( string filename in dialog.FileNames )
-                {
-                    try
-                    {
-                        using ( Bitmap b = (Bitmap) Bitmap.FromFile( filename ) )
-                        {
-                            var JSP = JSPImage.FromBitmap( b );
-                            WorkingFile.Images.Add( JSP );
-                        }
-                    }
-                    catch ( Exception ex )
-                    {
-                        WriteExceptionToFile( ex );
-                        MessageBox.Show( "Import of " + filename + " failed. We've wrote out the details to " + ErrorFilename );
-                    }
-                }
-                GenerateThumbnails();
+                ImportSprites( dialog.FileNames );
+            }
+            ThumbnailClick( ThumbnailList[ThumbnailList.Count - 1], EventArgs.Empty );
+
+            this.Refresh();
+        }
+
+        private void importFolder_Click( object sender, EventArgs e )
+        {
+            if ( WorkingFile == null )
+                WorkingFile = new JSP();
+
+            var dialog = new FolderBrowserDialog();
+            dialog.ShowNewFolderButton = false;
+            DialogResult result = dialog.ShowDialog();
+            if ( result == System.Windows.Forms.DialogResult.OK )
+            {
+                ImportSprites( Directory.GetFiles( dialog.SelectedPath ) );
             }
             ThumbnailClick( ThumbnailList[ThumbnailList.Count - 1], EventArgs.Empty );
 
