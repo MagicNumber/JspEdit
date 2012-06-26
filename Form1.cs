@@ -4,6 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.Drawing.Imaging;
 
 namespace JspEdit
 {
@@ -385,6 +386,24 @@ namespace JspEdit
 
             this.Refresh();
         }
+
+        private void ExportItem_Click( object sender, EventArgs e )
+        {
+            var dialog = new SaveFileDialog();
+            DialogResult result = dialog.ShowDialog();
+            if ( result == DialogResult.OK )
+            {
+                using ( var fh = new StreamWriter(dialog.FileName, false))
+                using (Bitmap B = WorkingFile.Images[SelectedImage].ToBitmap())
+                {
+                    B.Save( fh.BaseStream, ImageFormat.Bmp );
+                }
+                
+            }
+            this.Refresh();
+        }
+
+       
     }
 
 }

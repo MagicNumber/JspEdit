@@ -38,7 +38,7 @@
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ImportFolder = new System.Windows.Forms.ToolStripMenuItem();
             this.ExportButton = new System.Windows.Forms.ToolStripDropDownButton();
-            this.exportToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.ExportItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.ConfigButton = new System.Windows.Forms.ToolStripSplitButton();
@@ -128,14 +128,14 @@
             // exportToolStripMenuItem
             // 
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size( 152, 22 );
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size( 150, 22 );
             this.exportToolStripMenuItem.Text = "Import Sprite";
             this.exportToolStripMenuItem.Click += new System.EventHandler( this.ImportButton_Click );
             // 
             // ImportFolder
             // 
             this.ImportFolder.Name = "ImportFolder";
-            this.ImportFolder.Size = new System.Drawing.Size( 152, 22 );
+            this.ImportFolder.Size = new System.Drawing.Size( 150, 22 );
             this.ImportFolder.Text = "Import Folder";
             this.ImportFolder.Click += new System.EventHandler( this.importFolder_Click );
             // 
@@ -143,7 +143,7 @@
             // 
             this.ExportButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.ExportButton.DropDownItems.AddRange( new System.Windows.Forms.ToolStripItem[] {
-            this.exportToolStripMenuItem1,
+            this.ExportItem,
             this.exportFolderToolStripMenuItem} );
             this.ExportButton.Image = ( (System.Drawing.Image) ( resources.GetObject( "ExportButton.Image" ) ) );
             this.ExportButton.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -151,16 +151,17 @@
             this.ExportButton.Size = new System.Drawing.Size( 37, 28 );
             this.ExportButton.Text = "Export";
             // 
-            // exportToolStripMenuItem1
+            // ExportItem
             // 
-            this.exportToolStripMenuItem1.Name = "exportToolStripMenuItem1";
-            this.exportToolStripMenuItem1.Size = new System.Drawing.Size( 148, 22 );
-            this.exportToolStripMenuItem1.Text = "Export Sprite";
+            this.ExportItem.Name = "ExportItem";
+            this.ExportItem.Size = new System.Drawing.Size( 152, 22 );
+            this.ExportItem.Text = "Export Sprite";
+            this.ExportItem.Click += new System.EventHandler( this.ExportItem_Click );
             // 
             // exportFolderToolStripMenuItem
             // 
             this.exportFolderToolStripMenuItem.Name = "exportFolderToolStripMenuItem";
-            this.exportFolderToolStripMenuItem.Size = new System.Drawing.Size( 148, 22 );
+            this.exportFolderToolStripMenuItem.Size = new System.Drawing.Size( 152, 22 );
             this.exportFolderToolStripMenuItem.Text = "Export JSP";
             // 
             // toolStripSeparator1
@@ -377,7 +378,7 @@
         private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ImportFolder;
         private System.Windows.Forms.ToolStripDropDownButton ExportButton;
-        private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem ExportItem;
         private System.Windows.Forms.ToolStripMenuItem exportFolderToolStripMenuItem;
         private System.Windows.Forms.Label CountLabel;
         private System.Windows.Forms.Button UpButton;
