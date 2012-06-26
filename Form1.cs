@@ -393,15 +393,38 @@ namespace JspEdit
             DialogResult result = dialog.ShowDialog();
             if ( result == DialogResult.OK )
             {
-                using ( var fh = new StreamWriter(dialog.FileName, false))
-                using (Bitmap B = WorkingFile.Images[SelectedImage].ToBitmap())
-                {
-                    B.Save( fh.BaseStream, ImageFormat.Bmp );
-                }
-                
+                ExportSprite( WorkingFile.Images[SelectedImage], dialog.FileName );
             }
-            this.Refresh();
         }
+
+        private void ExportSprite( JSPImage img, string filename )
+        {
+            using ( var fh = new StreamWriter( filename, false ) )
+            using ( Bitmap B = img.ToBitmap() )
+            {
+                B.Save( fh.BaseStream, ImageFormat.Bmp );
+            }
+        }
+
+
+        private void exportFolder_Click( object sender, EventArgs e )
+        {
+            var dialog = new FolderBrowserDialog();
+            dialog.ShowNewFolderButton = true;
+            DialogResult result = dialog.ShowDialog();
+            if ( result == System.Windows.Forms.DialogResult.OK )
+            {
+                for ( int i = 0; i < WorkingFile.Images.Count; i++ )
+                {
+                    ExportSprite( WorkingFile.Images[i], string.Format( "{0}/{1:0000}.bmp", dialog.SelectedPath, i ) );
+                }
+
+            }
+            ThumbnailClick( ThumbnailList[ThumbnailList.Count - 1], EventArgs.Empty );
+
+        }
+
+
 
        
     }

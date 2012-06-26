@@ -39,7 +39,7 @@
             this.ImportFolder = new System.Windows.Forms.ToolStripMenuItem();
             this.ExportButton = new System.Windows.Forms.ToolStripDropDownButton();
             this.ExportItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exportFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportFolder = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.ConfigButton = new System.Windows.Forms.ToolStripSplitButton();
             this.CountLabel = new System.Windows.Forms.Label();
@@ -144,7 +144,7 @@
             this.ExportButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.ExportButton.DropDownItems.AddRange( new System.Windows.Forms.ToolStripItem[] {
             this.ExportItem,
-            this.exportFolderToolStripMenuItem} );
+            this.exportFolder} );
             this.ExportButton.Image = ( (System.Drawing.Image) ( resources.GetObject( "ExportButton.Image" ) ) );
             this.ExportButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ExportButton.Name = "ExportButton";
@@ -158,11 +158,12 @@
             this.ExportItem.Text = "Export Sprite";
             this.ExportItem.Click += new System.EventHandler( this.ExportItem_Click );
             // 
-            // exportFolderToolStripMenuItem
+            // exportFolder
             // 
-            this.exportFolderToolStripMenuItem.Name = "exportFolderToolStripMenuItem";
-            this.exportFolderToolStripMenuItem.Size = new System.Drawing.Size( 152, 22 );
-            this.exportFolderToolStripMenuItem.Text = "Export JSP";
+            this.exportFolder.Name = "exportFolder";
+            this.exportFolder.Size = new System.Drawing.Size( 152, 22 );
+            this.exportFolder.Text = "Export JSP";
+            this.exportFolder.Click += new System.EventHandler( this.exportFolder_Click );
             // 
             // toolStripSeparator1
             // 
@@ -379,7 +380,7 @@
         private System.Windows.Forms.ToolStripMenuItem ImportFolder;
         private System.Windows.Forms.ToolStripDropDownButton ExportButton;
         private System.Windows.Forms.ToolStripMenuItem ExportItem;
-        private System.Windows.Forms.ToolStripMenuItem exportFolderToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportFolder;
         private System.Windows.Forms.Label CountLabel;
         private System.Windows.Forms.Button UpButton;
         private System.Windows.Forms.Button DownButton;
