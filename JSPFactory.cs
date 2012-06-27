@@ -135,14 +135,12 @@ namespace JspEdit
                     { // End of transparent block
                             datas[imIndex].Add( (byte) ( buffer.Count | 128 ) );
                             buffer.Clear();
-                            buffer.Add( curByte );
                     }
                     else if ( prevByte != 0 && curByte == 0 )
                     { // End of non-transparent block
                         datas[imIndex].Add( (byte) buffer.Count );
                         datas[imIndex].AddRange( buffer );
                         buffer.Clear();
-                        buffer.Add( curByte );
                     }
                     else if ( dataIndex % obj.Images[imIndex].Width == 0 && dataIndex > 0)
                     { // End of row. Begin a new block regardless.
@@ -156,15 +154,8 @@ namespace JspEdit
                             datas[imIndex].AddRange( buffer );
                         }
                         buffer.Clear();
-                        buffer.Add( curByte );
                     }
-                    else
-                    {
-                        buffer.Add( curByte );
-                        if ( curByte == 0 )
-                        {
-                        }
-                    }
+                    buffer.Add( curByte );
 
                 }
                 if ( buffer[0] == 0 )
@@ -173,6 +164,7 @@ namespace JspEdit
                 }
                 else
                 {
+                    datas[imIndex].Add( (byte) buffer.Count );
                     datas[imIndex].AddRange( buffer );
                 }
 
