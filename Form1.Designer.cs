@@ -56,6 +56,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.mainDisplayArea = new JspEdit.ImageDisplay();
+            this.newButton = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -63,6 +64,7 @@
             // 
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size( 24, 24 );
             this.toolStrip1.Items.AddRange( new System.Windows.Forms.ToolStripItem[] {
+            this.newButton,
             this.OpenButton,
             this.SaveButton,
             this.SaveAsButton,
@@ -154,14 +156,14 @@
             // ExportItem
             // 
             this.ExportItem.Name = "ExportItem";
-            this.ExportItem.Size = new System.Drawing.Size( 152, 22 );
+            this.ExportItem.Size = new System.Drawing.Size( 148, 22 );
             this.ExportItem.Text = "Export Sprite";
             this.ExportItem.Click += new System.EventHandler( this.ExportItem_Click );
             // 
             // exportFolder
             // 
             this.exportFolder.Name = "exportFolder";
-            this.exportFolder.Size = new System.Drawing.Size( 152, 22 );
+            this.exportFolder.Size = new System.Drawing.Size( 148, 22 );
             this.exportFolder.Text = "Export JSP";
             this.exportFolder.Click += new System.EventHandler( this.exportFolder_Click );
             // 
@@ -336,6 +338,16 @@
             this.mainDisplayArea.Size = new System.Drawing.Size( 570, 432 );
             this.mainDisplayArea.TabIndex = 16;
             // 
+            // newButton
+            // 
+            this.newButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.newButton.Image = ( (System.Drawing.Image) ( resources.GetObject( "newButton.Image" ) ) );
+            this.newButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.newButton.Name = "newButton";
+            this.newButton.Size = new System.Drawing.Size( 28, 28 );
+            this.newButton.Text = "New ";
+            this.newButton.Click += new System.EventHandler( this.newButton_Click );
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF( 6F, 13F );
@@ -395,6 +407,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Panel panel1;
         private ImageDisplay mainDisplayArea;
+        private System.Windows.Forms.ToolStripButton newButton;
 
     }
 }

@@ -424,6 +424,13 @@ namespace JspEdit
 
         }
 
+        private void newButton_Click( object sender, EventArgs e )
+        {
+            WorkingFile = new JSP();
+            this.Refresh();
+            GenerateThumbnails();
+        }
+
 
 
        
