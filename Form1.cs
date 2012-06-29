@@ -19,16 +19,16 @@ namespace JspEdit
 
         List<ImageDisplay> ThumbnailList = new List<ImageDisplay>();
 
-        string _FilePath;
+        string _filepath;
         string FilePath
         {
             get
             {
-                return _FilePath;
+                return _filepath;
             }
             set
             {
-                _FilePath = value; this.Text = string.Format( "{0} - JSP Edit", value );
+                _filepath = value; this.Text = string.Format( "{0} - JSP Edit", value );
             }
         }
 
@@ -37,12 +37,22 @@ namespace JspEdit
         public MainForm()
         {
             InitializeComponent();
+            WorkingFile = new JSP();
             this.DoubleBuffered = true;
             this.MinimumSize = new Size( this.Size.Width, this.Size.Height );
         }
 
-        
 
+        public override void Refresh()
+        {
+            base.Refresh();
+            UpButton.Enabled = SelectedImage != 0;
+            DownButton.Enabled = SelectedImage != ( WorkingFile.Images.Count - 1 );
+            ofXBox.Enabled = WorkingFile.Images.Count > 0;
+            ofYBox.Enabled = WorkingFile.Images.Count > 0;
+
+
+        }
 
         private void OpenButton_Click( object sender, EventArgs e )
         {
@@ -157,9 +167,7 @@ namespace JspEdit
                 ThumbnailList[SelectedImage].BackColor = Color.Yellow;
                 
                 CountLabel.Text = string.Format( "Sprite {0} of {1}", SelectedImage+1, WorkingFile.Images.Count.ToString() );
-                UpButton.Enabled = SelectedImage != 0;
-                DownButton.Enabled = SelectedImage != (WorkingFile.Images.Count-1);
-
+               
                 WidthBox.Text = WorkingFile.Images[SelectedImage].Width.ToString();
                 HeightBox.Text = WorkingFile.Images[SelectedImage].Height.ToString();
                 ofXBox.Text = WorkingFile.Images[SelectedImage].OfsX.ToString();
