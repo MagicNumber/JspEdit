@@ -28,11 +28,14 @@ namespace JspEdit
             }
             set
             {
-                _filepath = value; this.Text = string.Format( "{0} - JSP Edit", value );
+                _filepath = value; 
+                this.Text = string.Format( "{0} - JSP Edit", value );
             }
         }
 
         JSP WorkingFile;
+        bool MouseDown;
+        Point LastMousePosition;
 
         public MainForm()
         {
@@ -50,8 +53,6 @@ namespace JspEdit
             DownButton.Enabled = SelectedImage != ( WorkingFile.Images.Count - 1 );
             ofXBox.Enabled = WorkingFile.Images.Count > 0;
             ofYBox.Enabled = WorkingFile.Images.Count > 0;
-
-
         }
 
         private void OpenButton_Click( object sender, EventArgs e )
@@ -437,6 +438,32 @@ namespace JspEdit
             WorkingFile = new JSP();
             this.Refresh();
             GenerateThumbnails();
+        }
+
+        private void mainDisplayArea_MouseDown( object sender, MouseEventArgs e )
+        {
+            MouseDown = true;
+        }
+
+        private void mainDisplayArea_MouseMove( object sender, MouseEventArgs e )
+        {
+            if (MouseDown && WorkingFile.Images.Count > SelectedImage)
+            {
+                short ofsx = WorkingFile.Images[SelectedImage].OfsX;
+                short ofsy = WorkingFile.Images[SelectedImage].OfsY;
+                ofsx += (short)(e.Location.X - LastMousePosition.X);
+                ofsy += (short)(e.Location.Y - LastMousePosition.Y);
+                WorkingFile.Images[SelectedImage].SetOffSet( ofsx, ofsy );
+
+                ofXBox.Text = ofsx.ToString();
+                ofYBox.Text = ofsy.ToString();
+            }
+            LastMousePosition = e.Location;
+        }
+
+        private void mainDisplayArea_MouseUp( object sender, MouseEventArgs e )
+        {
+            MouseDown = false;
         }
 
 

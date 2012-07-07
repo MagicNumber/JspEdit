@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager( typeof( MainForm ) );
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.newButton = new System.Windows.Forms.ToolStripButton();
             this.OpenButton = new System.Windows.Forms.ToolStripButton();
             this.SaveButton = new System.Windows.Forms.ToolStripButton();
             this.SaveAsButton = new System.Windows.Forms.ToolStripButton();
@@ -56,7 +57,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.mainDisplayArea = new JspEdit.ImageDisplay();
-            this.newButton = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -79,6 +79,16 @@
             this.toolStrip1.Size = new System.Drawing.Size( 792, 31 );
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
+            // 
+            // newButton
+            // 
+            this.newButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.newButton.Image = ( (System.Drawing.Image) ( resources.GetObject( "newButton.Image" ) ) );
+            this.newButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.newButton.Name = "newButton";
+            this.newButton.Size = new System.Drawing.Size( 28, 28 );
+            this.newButton.Text = "New ";
+            this.newButton.Click += new System.EventHandler( this.newButton_Click );
             // 
             // OpenButton
             // 
@@ -337,16 +347,9 @@
             this.mainDisplayArea.Name = "mainDisplayArea";
             this.mainDisplayArea.Size = new System.Drawing.Size( 570, 432 );
             this.mainDisplayArea.TabIndex = 16;
-            // 
-            // newButton
-            // 
-            this.newButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.newButton.Image = ( (System.Drawing.Image) ( resources.GetObject( "newButton.Image" ) ) );
-            this.newButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.newButton.Name = "newButton";
-            this.newButton.Size = new System.Drawing.Size( 28, 28 );
-            this.newButton.Text = "New ";
-            this.newButton.Click += new System.EventHandler( this.newButton_Click );
+            this.mainDisplayArea.MouseDown += new System.Windows.Forms.MouseEventHandler( this.mainDisplayArea_MouseDown );
+            this.mainDisplayArea.MouseMove += new System.Windows.Forms.MouseEventHandler( this.mainDisplayArea_MouseMove );
+            this.mainDisplayArea.MouseUp += new System.Windows.Forms.MouseEventHandler( this.mainDisplayArea_MouseUp );
             // 
             // MainForm
             // 
