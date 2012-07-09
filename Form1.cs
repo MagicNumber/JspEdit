@@ -34,7 +34,7 @@ namespace JspEdit
         }
 
         JSP WorkingFile;
-        bool MouseDown;
+        bool ShiftMouseDown;
         Point LastMousePosition;
 
         public MainForm()
@@ -425,7 +425,7 @@ namespace JspEdit
             {
                 for ( int i = 0; i < WorkingFile.Images.Count; i++ )
                 {
-                    ExportSprite( WorkingFile.Images[i], string.Format( "{0}/{1:0000}.bmp", dialog.SelectedPath, i ) );
+                    ExportSprite( WorkingFile.Images[i], string.Format( "{0}/{1:0000}.bmp", dialog.SelectedPath, i+1 ) );
                 }
 
             }
@@ -442,12 +442,12 @@ namespace JspEdit
 
         private void mainDisplayArea_MouseDown( object sender, MouseEventArgs e )
         {
-            MouseDown = true;
+            ShiftMouseDown = true;
         }
 
         private void mainDisplayArea_MouseMove( object sender, MouseEventArgs e )
         {
-            if (MouseDown && WorkingFile.Images.Count > SelectedImage)
+            if (ShiftMouseDown && WorkingFile.Images.Count > SelectedImage)
             {
                 short ofsx = WorkingFile.Images[SelectedImage].OfsX;
                 short ofsy = WorkingFile.Images[SelectedImage].OfsY;
@@ -463,7 +463,7 @@ namespace JspEdit
 
         private void mainDisplayArea_MouseUp( object sender, MouseEventArgs e )
         {
-            MouseDown = false;
+            ShiftMouseDown = false;
         }
 
         private void ColourBox_SelectedIndexChanged( object sender, EventArgs e )
@@ -514,7 +514,43 @@ namespace JspEdit
             if ( SelectedImage >= WorkingFile.Images.Count )
                 return;
 
+            if ( FromColourBox.SelectedIndex < Enum.GetValues( typeof( JSPImage.MainColors ) ).Length
+                && ToColourBox.SelectedIndex < Enum.GetValues( typeof( JSPImage.MainColors ) ).Length )
+            {
+                ReColourImage( WorkingFile.Images[SelectedImage], 
+                    (JSPImage.MainColors) FromColourBox.SelectedIndex, 
+                    (JSPImage.MainColors) ToColourBox.SelectedIndex );
 
+                
+            }
+        }
+
+        private void ReColourImage(JSPImage img, JSPImage.MainColors From, JSPImage.MainColors To)
+        {
+            int numColors = Enum.GetValues( typeof( JSPImage.MainColors ) ).Length;
+            int currentCol = (int) From;
+
+            int diff = 0;
+            while ( currentCol != (int) To )
+            {
+                currentCol = ( currentCol + 1 ) % numColors;
+                diff++;
+            }
+
+            // diff is now how many block-shifts we have to do so that the colors wind up in the right place.
+
+            byte[] dataWIP = new byte[img.Data.Length];
+            img.Data.CopyTo( dataWIP, 0 );
+
+            for ( int i = 0; i < dataWIP.Length; i++ )
+            {
+                if ( dataWIP[i] > 32 * (int) From && dataWIP[i] < 32 * (int) From + 31 )
+                {
+                    dataWIP[i] = (byte) ( ( dataWIP[i] + 32 /* Colors per block */ * diff ) % 256 );
+                }
+            }
+
+            img.SetData( dataWIP );
         }
 
 
