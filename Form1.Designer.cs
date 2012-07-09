@@ -59,7 +59,7 @@
             this.FromColourBox = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.ColourChangeButton = new System.Windows.Forms.Button();
             this.ToColourBox = new System.Windows.Forms.ComboBox();
             this.FromBox = new System.Windows.Forms.Panel();
             this.ToBox = new System.Windows.Forms.Panel();
@@ -260,7 +260,7 @@
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font( "Verdana", 10F );
-            this.label3.Location = new System.Drawing.Point( 209, 78 );
+            this.label3.Location = new System.Drawing.Point( 209, 79 );
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size( 50, 17 );
             this.label3.TabIndex = 7;
@@ -311,7 +311,7 @@
             this.label4.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font( "Verdana", 10F );
-            this.label4.Location = new System.Drawing.Point( 435, 78 );
+            this.label4.Location = new System.Drawing.Point( 435, 79 );
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size( 63, 17 );
             this.label4.TabIndex = 11;
@@ -381,15 +381,16 @@
             this.label6.TabIndex = 19;
             this.label6.Text = "with";
             // 
-            // button1
+            // ColourChangeButton
             // 
-            this.button1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.button1.Location = new System.Drawing.Point( 643, 122 );
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size( 75, 23 );
-            this.button1.TabIndex = 21;
-            this.button1.Text = "Go";
-            this.button1.UseVisualStyleBackColor = true;
+            this.ColourChangeButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.ColourChangeButton.Location = new System.Drawing.Point( 643, 122 );
+            this.ColourChangeButton.Name = "ColourChangeButton";
+            this.ColourChangeButton.Size = new System.Drawing.Size( 75, 23 );
+            this.ColourChangeButton.TabIndex = 21;
+            this.ColourChangeButton.Text = "Go";
+            this.ColourChangeButton.UseVisualStyleBackColor = true;
+            this.ColourChangeButton.Click += new System.EventHandler( this.ColourChangeButton_Click );
             // 
             // ToColourBox
             // 
@@ -449,7 +450,7 @@
             this.Controls.Add( this.ToBox );
             this.Controls.Add( this.FromBox );
             this.Controls.Add( this.ToColourBox );
-            this.Controls.Add( this.button1 );
+            this.Controls.Add( this.ColourChangeButton );
             this.Controls.Add( this.label6 );
             this.Controls.Add( this.label1 );
             this.Controls.Add( this.FromColourBox );
@@ -511,7 +512,7 @@
         private System.Windows.Forms.ComboBox FromColourBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button ColourChangeButton;
         private System.Windows.Forms.ComboBox ToColourBox;
         private System.Windows.Forms.Panel FromBox;
         private System.Windows.Forms.Panel ToBox;

@@ -390,9 +390,9 @@ namespace JspEdit
             if ( result == System.Windows.Forms.DialogResult.OK )
             {
                 ImportSprites( Directory.GetFiles( dialog.SelectedPath ), false );
-            }
-            ThumbnailClick( ThumbnailList[ThumbnailList.Count - 1], EventArgs.Empty );
 
+                ThumbnailClick( ThumbnailList[ThumbnailList.Count - 1], EventArgs.Empty );
+            }
             this.Refresh();
         }
 
@@ -507,6 +507,14 @@ namespace JspEdit
                 default:
                     break;
             }
+        }
+
+        private void ColourChangeButton_Click( object sender, EventArgs e )
+        {
+            if ( SelectedImage >= WorkingFile.Images.Count )
+                return;
+
+
         }
 
 

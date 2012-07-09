@@ -13,6 +13,18 @@ namespace JspEdit
 
     public class JSPImage
     {
+        public enum MainColors
+        {
+            Grey,
+            Green,
+            Brown,
+            Blue,
+            Red,
+            Yellow,
+            Purple,
+            Cyan
+        }
+
         // Blacks replaced with (1,1,1), because true black is rendered as transparent. 
         #region Colors
         public static readonly Color[] colors = new Color[]{
