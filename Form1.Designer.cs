@@ -347,9 +347,6 @@
             this.mainDisplayArea.Name = "mainDisplayArea";
             this.mainDisplayArea.Size = new System.Drawing.Size( 570, 432 );
             this.mainDisplayArea.TabIndex = 16;
-            this.mainDisplayArea.MouseDown += new System.Windows.Forms.MouseEventHandler( this.mainDisplayArea_MouseDown );
-            this.mainDisplayArea.MouseMove += new System.Windows.Forms.MouseEventHandler( this.mainDisplayArea_MouseMove );
-            this.mainDisplayArea.MouseUp += new System.Windows.Forms.MouseEventHandler( this.mainDisplayArea_MouseUp );
             // 
             // MainForm
             // 
