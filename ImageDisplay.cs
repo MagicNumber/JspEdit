@@ -15,9 +15,24 @@ namespace JspEdit
             }
             set
             {
-                _image = value; 
-                if (_image != null)
+                _image = value;
+
+                if ( _image != null )
+                {
                     _render = _image.ToBitmap();
+                    _image.DataChanged += new JSPImage.DataChangeHandler( _image_DataChanged );
+
+                }
+            }
+        }
+
+        void _image_DataChanged( object sender, byte[] oldData )
+        {
+            if ( _image != null )
+            {
+                _render.Dispose();
+                _render = _image.ToBitmap();
+                this.Invalidate();
             }
         }
 

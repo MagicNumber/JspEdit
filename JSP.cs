@@ -13,6 +13,9 @@ namespace JspEdit
 
     public class JSPImage
     {
+        public delegate void DataChangeHandler( object sender, byte[] oldData );
+        public event DataChangeHandler DataChanged;
+
         public enum MainColors
         {
             Grey,
@@ -332,7 +335,10 @@ namespace JspEdit
             if ( newData.Length != ( Width * Height ) )
                 throw new ArgumentException( "Data wrong length" );
             
+            if (DataChanged != null)
+                DataChanged(this, this.Data);
             this.Data = newData;
+            
         }
 
         /// <summary>
