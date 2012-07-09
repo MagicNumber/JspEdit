@@ -466,6 +466,49 @@ namespace JspEdit
             MouseDown = false;
         }
 
+        private void ColourBox_SelectedIndexChanged( object sender, EventArgs e )
+        {
+            Panel box;
+            if ( sender == FromColourBox )
+            {
+                box = FromBox;
+            }
+            else
+            {
+                box = ToBox;
+            }
+
+            switch ( ((ComboBox)sender).Text )
+            {
+                case "Grey":
+                    box.BackColor = JSPImage.colors[16 * 1-1];
+                    break;
+                case "Green":
+                    box.BackColor = JSPImage.colors[16 * 3-1];
+                    break;
+                case "Brown":
+                    box.BackColor = JSPImage.colors[16 * 5-1];
+                    break;
+                case "Blue":
+                    box.BackColor = JSPImage.colors[16 * 7-1];
+                    break;
+                case "Red":
+                    box.BackColor = JSPImage.colors[16 * 9-1];
+                    break;
+                case "Yellow":
+                    box.BackColor = JSPImage.colors[16 * 11-1];
+                    break;
+                case "Purple":
+                    box.BackColor = JSPImage.colors[16 * 13-1];
+                    break;
+                case "Cyan":
+                    box.BackColor = JSPImage.colors[16 * 15-1];
+                    break;
+                default:
+                    break;
+            }
+        }
+
 
 
        

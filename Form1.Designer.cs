@@ -56,6 +56,13 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.FromColourBox = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.ToColourBox = new System.Windows.Forms.ComboBox();
+            this.FromBox = new System.Windows.Forms.Panel();
+            this.ToBox = new System.Windows.Forms.Panel();
             this.mainDisplayArea = new JspEdit.ImageDisplay();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -333,6 +340,92 @@
             this.panel1.TabIndex = 15;
             this.panel1.MouseWheel += new System.Windows.Forms.MouseEventHandler( this.panel1_MouseWheel );
             // 
+            // FromColourBox
+            // 
+            this.FromColourBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.FromColourBox.FormattingEnabled = true;
+            this.FromColourBox.Items.AddRange( new object[] {
+            "Grey",
+            "Green",
+            "Brown",
+            "Blue",
+            "Red",
+            "Yellow",
+            "Purple",
+            "Cyan"} );
+            this.FromColourBox.Location = new System.Drawing.Point( 329, 123 );
+            this.FromColourBox.Name = "FromColourBox";
+            this.FromColourBox.Size = new System.Drawing.Size( 100, 21 );
+            this.FromColourBox.TabIndex = 17;
+            this.FromColourBox.SelectedIndexChanged += new System.EventHandler( this.ColourBox_SelectedIndexChanged );
+            // 
+            // label1
+            // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font( "Verdana", 10F );
+            this.label1.Location = new System.Drawing.Point( 262, 125 );
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size( 61, 17 );
+            this.label1.TabIndex = 18;
+            this.label1.Text = "Replace";
+            // 
+            // label6
+            // 
+            this.label6.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font( "Verdana", 10F );
+            this.label6.Location = new System.Drawing.Point( 465, 125 );
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size( 37, 17 );
+            this.label6.TabIndex = 19;
+            this.label6.Text = "with";
+            // 
+            // button1
+            // 
+            this.button1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.button1.Location = new System.Drawing.Point( 643, 122 );
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size( 75, 23 );
+            this.button1.TabIndex = 21;
+            this.button1.Text = "Go";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // ToColourBox
+            // 
+            this.ToColourBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.ToColourBox.FormattingEnabled = true;
+            this.ToColourBox.Items.AddRange( new object[] {
+            "Grey",
+            "Green",
+            "Brown",
+            "Blue",
+            "Red",
+            "Yellow",
+            "Purple",
+            "Cyan"} );
+            this.ToColourBox.Location = new System.Drawing.Point( 537, 123 );
+            this.ToColourBox.Name = "ToColourBox";
+            this.ToColourBox.Size = new System.Drawing.Size( 100, 21 );
+            this.ToColourBox.TabIndex = 22;
+            this.ToColourBox.SelectedIndexChanged += new System.EventHandler( this.ColourBox_SelectedIndexChanged );
+            // 
+            // FromBox
+            // 
+            this.FromBox.BackColor = System.Drawing.Color.White;
+            this.FromBox.Location = new System.Drawing.Point( 436, 122 );
+            this.FromBox.Name = "FromBox";
+            this.FromBox.Size = new System.Drawing.Size( 23, 23 );
+            this.FromBox.TabIndex = 23;
+            // 
+            // ToBox
+            // 
+            this.ToBox.BackColor = System.Drawing.Color.White;
+            this.ToBox.Location = new System.Drawing.Point( 508, 122 );
+            this.ToBox.Name = "ToBox";
+            this.ToBox.Size = new System.Drawing.Size( 23, 23 );
+            this.ToBox.TabIndex = 24;
+            // 
             // mainDisplayArea
             // 
             this.mainDisplayArea.Anchor = ( (System.Windows.Forms.AnchorStyles) ( ( ( ( System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom )
@@ -343,9 +436,9 @@
             this.mainDisplayArea.Centered = true;
             this.mainDisplayArea.DrawOrigin = true;
             this.mainDisplayArea.Image = null;
-            this.mainDisplayArea.Location = new System.Drawing.Point( 210, 105 );
+            this.mainDisplayArea.Location = new System.Drawing.Point( 210, 174 );
             this.mainDisplayArea.Name = "mainDisplayArea";
-            this.mainDisplayArea.Size = new System.Drawing.Size( 570, 432 );
+            this.mainDisplayArea.Size = new System.Drawing.Size( 570, 363 );
             this.mainDisplayArea.TabIndex = 16;
             // 
             // MainForm
@@ -353,6 +446,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF( 6F, 13F );
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size( 792, 566 );
+            this.Controls.Add( this.ToBox );
+            this.Controls.Add( this.FromBox );
+            this.Controls.Add( this.ToColourBox );
+            this.Controls.Add( this.button1 );
+            this.Controls.Add( this.label6 );
+            this.Controls.Add( this.label1 );
+            this.Controls.Add( this.FromColourBox );
             this.Controls.Add( this.mainDisplayArea );
             this.Controls.Add( this.panel1 );
             this.Controls.Add( this.ofYBox );
@@ -408,6 +508,13 @@
         private System.Windows.Forms.Panel panel1;
         private ImageDisplay mainDisplayArea;
         private System.Windows.Forms.ToolStripButton newButton;
+        private System.Windows.Forms.ComboBox FromColourBox;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ComboBox ToColourBox;
+        private System.Windows.Forms.Panel FromBox;
+        private System.Windows.Forms.Panel ToBox;
 
     }
 }
