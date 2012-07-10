@@ -334,11 +334,11 @@ namespace JspEdit
         {
             if ( newData.Length != ( Width * Height ) )
                 throw new ArgumentException( "Data wrong length" );
-            
-            if (DataChanged != null)
-                DataChanged(this, this.Data);
+
+            var olddata = this.Data;
             this.Data = newData;
-            
+            if ( DataChanged != null )
+                DataChanged( this, olddata );
         }
 
         /// <summary>
