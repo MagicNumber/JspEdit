@@ -348,13 +348,20 @@ namespace JspEdit
 #endif
                     }
                 }
+#if !DEBUG
                 catch ( Exception ex )
                 {
+
                     if ( weCareAboutExceptions )
                     {
                         WriteExceptionToFile( ex );
                         MessageBox.Show( "Import of " + filename + " failed. We've wrote out the details to " + ErrorFilename );
                     }
+
+                }
+#endif
+                finally
+                {
                 }
             }
             GenerateThumbnails();
@@ -373,9 +380,8 @@ namespace JspEdit
             if ( result == System.Windows.Forms.DialogResult.OK )
             {
                 ImportSprites( dialog.FileNames, true );
+                panel1.VerticalScroll.Value = panel1.VerticalScroll.Maximum;
             }
-            ThumbnailClick( ThumbnailList[ThumbnailList.Count - 1], EventArgs.Empty );
-
             this.Refresh();
         }
 
@@ -551,6 +557,22 @@ namespace JspEdit
             }
 
             img.SetData( dataWIP );
+        }
+
+        private void AllButton_Click( object sender, EventArgs e )
+        {
+            for ( int i = 0; i < WorkingFile.Images.Count; i++ )
+            {
+                if ( FromColourBox.SelectedIndex < Enum.GetValues( typeof( JSPImage.MainColors ) ).Length
+                && ToColourBox.SelectedIndex < Enum.GetValues( typeof( JSPImage.MainColors ) ).Length )
+                {
+                    ReColourImage( WorkingFile.Images[i],
+                        (JSPImage.MainColors) FromColourBox.SelectedIndex,
+                        (JSPImage.MainColors) ToColourBox.SelectedIndex );
+
+
+                }
+            }
         }
 
 

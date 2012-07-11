@@ -148,14 +148,14 @@
             // exportToolStripMenuItem
             // 
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size( 150, 22 );
-            this.exportToolStripMenuItem.Text = "Import Sprite";
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size( 179, 22 );
+            this.exportToolStripMenuItem.Text = "Import Single Sprite";
             this.exportToolStripMenuItem.Click += new System.EventHandler( this.ImportButton_Click );
             // 
             // ImportFolder
             // 
             this.ImportFolder.Name = "ImportFolder";
-            this.ImportFolder.Size = new System.Drawing.Size( 150, 22 );
+            this.ImportFolder.Size = new System.Drawing.Size( 179, 22 );
             this.ImportFolder.Text = "Import Folder";
             this.ImportFolder.Click += new System.EventHandler( this.importFolder_Click );
             // 
@@ -452,6 +452,7 @@
             this.AllButton.TabIndex = 25;
             this.AllButton.Text = "All";
             this.AllButton.UseVisualStyleBackColor = true;
+            this.AllButton.Click += new System.EventHandler( this.AllButton_Click );
             // 
             // MainForm
             // 
