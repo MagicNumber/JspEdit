@@ -334,6 +334,13 @@ namespace JspEdit
         {
             foreach ( string filename in files )
             {
+                string[] bits = filename.Split('.');
+                string ext = bits[bits.Length-1].ToLower();
+                if ( !( ext == "gif" || ext == "jpeg" || ext == "jpg" || ext == "png" || ext == "bmp" || ext == "tiff" ) )
+                {
+                    return;
+                }
+
                 try
                 {
                     using ( Bitmap b = (Bitmap) Bitmap.FromFile( filename ) )

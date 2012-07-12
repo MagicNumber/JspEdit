@@ -63,8 +63,8 @@
             this.ToColourBox = new System.Windows.Forms.ComboBox();
             this.FromBox = new System.Windows.Forms.Panel();
             this.ToBox = new System.Windows.Forms.Panel();
-            this.mainDisplayArea = new JspEdit.ImageDisplay();
             this.AllButton = new System.Windows.Forms.Button();
+            this.mainDisplayArea = new JspEdit.ImageDisplay();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -414,6 +414,7 @@
             // 
             // FromBox
             // 
+            this.FromBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.FromBox.BackColor = System.Drawing.Color.White;
             this.FromBox.Location = new System.Drawing.Point( 411, 123 );
             this.FromBox.Name = "FromBox";
@@ -422,11 +423,23 @@
             // 
             // ToBox
             // 
+            this.ToBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.ToBox.BackColor = System.Drawing.Color.White;
             this.ToBox.Location = new System.Drawing.Point( 483, 123 );
             this.ToBox.Name = "ToBox";
             this.ToBox.Size = new System.Drawing.Size( 23, 23 );
             this.ToBox.TabIndex = 24;
+            // 
+            // AllButton
+            // 
+            this.AllButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.AllButton.Location = new System.Drawing.Point( 699, 123 );
+            this.AllButton.Name = "AllButton";
+            this.AllButton.Size = new System.Drawing.Size( 75, 23 );
+            this.AllButton.TabIndex = 25;
+            this.AllButton.Text = "All";
+            this.AllButton.UseVisualStyleBackColor = true;
+            this.AllButton.Click += new System.EventHandler( this.AllButton_Click );
             // 
             // mainDisplayArea
             // 
@@ -442,17 +455,6 @@
             this.mainDisplayArea.Name = "mainDisplayArea";
             this.mainDisplayArea.Size = new System.Drawing.Size( 570, 363 );
             this.mainDisplayArea.TabIndex = 16;
-            // 
-            // AllButton
-            // 
-            this.AllButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.AllButton.Location = new System.Drawing.Point( 699, 123 );
-            this.AllButton.Name = "AllButton";
-            this.AllButton.Size = new System.Drawing.Size( 75, 23 );
-            this.AllButton.TabIndex = 25;
-            this.AllButton.Text = "All";
-            this.AllButton.UseVisualStyleBackColor = true;
-            this.AllButton.Click += new System.EventHandler( this.AllButton_Click );
             // 
             // MainForm
             // 
