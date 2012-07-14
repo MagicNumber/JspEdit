@@ -376,7 +376,9 @@ namespace JspEdit
                 length: numBytesPerRow
                 );
             }
-            
+
+            B.UnlockBits( imgdata );
+
             B.MakeTransparent( Color.Black );
             return B;
         }

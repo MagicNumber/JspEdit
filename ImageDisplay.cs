@@ -91,7 +91,7 @@ namespace JspEdit
                 if ( Centered )
                 {
                     e.Graphics.TranslateTransform( this.Width / 2, this.Height / 2 );
-                    e.Graphics.TranslateTransform( -Render.Width / 2, -Render.Height / 2 );
+                    e.Graphics.TranslateTransform( -newWidth / 2, -newHeight / 2 );
                 }
 
                 e.Graphics.DrawImage( this.Render, 0, 0, newWidth, newHeight );

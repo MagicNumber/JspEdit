@@ -30,6 +30,9 @@ namespace JspEdit
             {
                 _filepath = value; 
                 this.Text = string.Format( "{0} - JSP Edit", value );
+#if DEBUG
+                this.Text += " (DEBUG)";
+#endif
             }
         }
 
@@ -129,7 +132,7 @@ namespace JspEdit
             GenerateThumbnails();
 
             SelectedImage = 0;
-            ThumbnailClick( ThumbnailList[0], EventArgs.Empty ); // Load the first thumbnail automatically. 
+            ClickOnThumbnail( 0 ); // Load the first thumbnail automatically. 
         }
 
         void GenerateThumbnails()
@@ -156,14 +159,33 @@ namespace JspEdit
             panel1.Refresh();
         }
 
+        void ClickOnThumbnail( ImageDisplay nail )
+        {
+            if (ThumbnailList.Contains(nail))
+                ThumbnailClick( nail, EventArgs.Empty );
+            else
+                Debug.WriteLine( "Tried to access non-existing Thumbnail" );
+        }
 
+
+        void ClickOnThumbnail( int index )
+        {
+            if ( index < 0 || index > ThumbnailList.Count - 1 )
+            {
+                Debug.WriteLine( "Tried to access non-existing Thumbnail" );
+            }
+            else
+            {
+                ThumbnailClick( ThumbnailList[index], EventArgs.Empty );
+            }
+        }
 
         void ThumbnailClick( object sender, EventArgs e )
         {
             if ( sender is ImageDisplay )
             {
-                
-                ThumbnailList[SelectedImage].BackColor = Color.White;
+                if (SelectedImage >= 0 && SelectedImage <= ThumbnailList.Count-1)
+                    ThumbnailList[SelectedImage].BackColor = Color.White; // Because this one might've been deleted.
                 SelectedImage = ThumbnailList.IndexOf( (ImageDisplay) sender );
                 ThumbnailList[SelectedImage].BackColor = Color.Yellow;
                 
@@ -289,6 +311,7 @@ namespace JspEdit
                 }
                 delThumbnail.Dispose();
             }
+            this.Refresh();
         }
 
         private void UpButton_Click( object sender, EventArgs e )
@@ -308,7 +331,7 @@ namespace JspEdit
             
             panel1.ScrollControlIntoView( low );
 
-            ThumbnailClick( low, EventArgs.Empty );
+            ClickOnThumbnail( low );
         }
 
         private void DownButton_Click( object sender, EventArgs e )
@@ -327,18 +350,18 @@ namespace JspEdit
             low.Top = temp;
             panel1.ScrollControlIntoView( high );
 
-            ThumbnailClick( high, EventArgs.Empty );
+            ClickOnThumbnail( high );
         }
 
         private void ImportSprites( string[] files, bool weCareAboutExceptions )
         {
             foreach ( string filename in files )
             {
-                string[] bits = filename.Split('.');
-                string ext = bits[bits.Length-1].ToLower();
+                string[] bits = filename.Split( '.' );
+                string ext = bits[bits.Length - 1].ToLower();
                 if ( !( ext == "gif" || ext == "jpeg" || ext == "jpg" || ext == "png" || ext == "bmp" || ext == "tiff" ) )
                 {
-                    return;
+                    break;
                 }
 
                 try
@@ -404,7 +427,7 @@ namespace JspEdit
             {
                 ImportSprites( Directory.GetFiles( dialog.SelectedPath ), false );
 
-                ThumbnailClick( ThumbnailList[ThumbnailList.Count - 1], EventArgs.Empty );
+                ClickOnThumbnail( ThumbnailList.Count - 1);
             }
             this.Refresh();
         }
@@ -442,7 +465,7 @@ namespace JspEdit
                 }
 
             }
-            ThumbnailClick( ThumbnailList[ThumbnailList.Count - 1], EventArgs.Empty );
+            ClickOnThumbnail( ThumbnailList.Count - 1 );
 
         }
 
