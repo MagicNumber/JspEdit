@@ -174,15 +174,15 @@
             // ExportItem
             // 
             this.ExportItem.Name = "ExportItem";
-            this.ExportItem.Size = new System.Drawing.Size( 148, 22 );
-            this.ExportItem.Text = "Export Sprite";
+            this.ExportItem.Size = new System.Drawing.Size( 179, 22 );
+            this.ExportItem.Text = "Export Single Sprite";
             this.ExportItem.Click += new System.EventHandler( this.ExportItem_Click );
             // 
             // exportFolder
             // 
             this.exportFolder.Name = "exportFolder";
-            this.exportFolder.Size = new System.Drawing.Size( 148, 22 );
-            this.exportFolder.Text = "Export JSP";
+            this.exportFolder.Size = new System.Drawing.Size( 179, 22 );
+            this.exportFolder.Text = "Export Entire JSP";
             this.exportFolder.Click += new System.EventHandler( this.exportFolder_Click );
             // 
             // toolStripSeparator1
